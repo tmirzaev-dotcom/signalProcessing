@@ -1,0 +1,1161 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>asteroid.losses.pmsqe &mdash; asteroid 0.4.0alpha documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://github.com/mpariente/asteroid_modules/asteroid/losses/pmsqe.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" /> -->
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch">
+       <!-- <img class="call-to-action-img" src="../../../_static/images/asteroid_logo_dark.png"/> -->
+      </a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <div class="resources-dropdown">
+              <a id="resourcesDropdownButton" data-toggle="resources-dropdown">
+                Resources
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/"">
+                  <span class=dropdown-title>Developer Resources</span>
+                  <p>Find resources and get questions answered</p>
+                </a>
+                <!--
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/">
+                  <span class=dropdown-title>About</span>
+                  <p>Learn about PyTorch’s features and capabilities</p>
+                </a>
+                -->
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.4.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Start here</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../why_use_asteroid.html">What is Asteroid?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Asteroid</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/egs_README.html">What is a recipe?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_datasets.html">Datasets and tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training_and_evaluation.html">Training and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/pretrained_models.html">Pretrained models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notebooks and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">NB: Getting stated with Asteroid</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/02_Filterbank.ipynb">NB: Understanding the Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/03_PITLossWrapper.ipynb">NB: Our PITLossWrapper explained</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/04_ProcessLargeAudioFiles.ipynb">NB: Processing large wav files</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://colab.research.google.com/drive/1BDNQZBJCDcwQhSguf3XBE7ff2KXhWu_j">Community NB: Numpy vs. Asteroid STFT</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/data.html">PyTorch Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/filterbanks.html">Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/blocks.html">DNN building blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/losses.html">Losses &amp; Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/system.html">Lightning Wrapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/optimizers.html">Optimizers &amp; Schedulers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/dsp.html">DSP Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/cli.html">CLI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution_guide.html">Asteroid High-Level Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/CONTRIBUTING.html">How to contribute</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../../../index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="../../index.html">Module code</a> &gt;</li>
+        
+          <li><a href="../../asteroid.html">asteroid</a> &gt;</li>
+        
+      <li>asteroid.losses.pmsqe</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <h1>Source code for asteroid.losses.pmsqe</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">tensor</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">loadmat</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<div class="viewcode-block" id="SingleSrcPMSQE"><a class="viewcode-back" href="../../../package_reference/losses.html#asteroid.losses.SingleSrcPMSQE">[docs]</a><span class="k">class</span> <span class="nc">SingleSrcPMSQE</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Computes the Perceptual Metric for Speech Quality Evaluation (PMSQE)</span>
+<span class="sd">    as described in [1].</span>
+<span class="sd">    This version is only designed for 16 kHz (512 length DFT).</span>
+<span class="sd">    Adaptation to 8 kHz could be done by changing the parameters of the</span>
+<span class="sd">    class (see Tensorflow implementation).</span>
+<span class="sd">    The SLL, frequency and gain equalization are applied in each</span>
+<span class="sd">    sequence independently.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        window_name (str): Select the used window function for the correct</span>
+<span class="sd">            factor to be applied. Defaults to sqrt hanning window.</span>
+<span class="sd">            Among [&#39;rect&#39;, &#39;hann&#39;, &#39;sqrt_hann&#39;, &#39;hamming&#39;, &#39;flatTop&#39;].</span>
+<span class="sd">        window_weight (float, optional): Correction to the window factor</span>
+<span class="sd">            applied.</span>
+<span class="sd">        bark_eq (bool, optional): Whether to apply bark equalization.</span>
+<span class="sd">        gain_eq (bool, optional): Whether to apply gain equalization.</span>
+<span class="sd">        sample_rate (int): Sample rate of the input audio.</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] J.M.Martin, A.M.Gomez, J.A.Gonzalez, A.M.Peinado &#39;A Deep Learning</span>
+<span class="sd">        Loss Function based on the Perceptual Evaluation of the</span>
+<span class="sd">        Speech Quality&#39;, IEEE Signal Processing Letters, 2018.</span>
+<span class="sd">        Implemented by Juan M. Martin. Contact: mdjuamart@ugr.es</span>
+<span class="sd">        Copyright 2019: University of Granada, Signal Processing, Multimedia</span>
+<span class="sd">        Transmission and Speech/Audio Technologies (SigMAT) Group.</span>
+
+<span class="sd">    .. note:: Inspired on the Perceptual Evaluation of the Speech Quality (PESQ)</span>
+<span class="sd">        algorithm, this function consists of two regularization factors :</span>
+<span class="sd">        the symmetrical and asymmetrical distortion in the loudness domain.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; import torch</span>
+<span class="sd">        &gt;&gt;&gt; from asteroid.filterbanks import STFTFB, Encoder, transforms</span>
+<span class="sd">        &gt;&gt;&gt; from asteroid.losses import PITLossWrapper, SingleSrcPMSQE</span>
+<span class="sd">        &gt;&gt;&gt; stft = Encoder(STFTFB(kernel_size=512, n_filters=512, stride=256))</span>
+<span class="sd">        &gt;&gt;&gt; # Usage by itself</span>
+<span class="sd">        &gt;&gt;&gt; ref, est = torch.randn(2, 1, 16000), torch.randn(2, 1, 16000)</span>
+<span class="sd">        &gt;&gt;&gt; ref_spec = transforms.take_mag(stft(ref))</span>
+<span class="sd">        &gt;&gt;&gt; est_spec = transforms.take_mag(stft(est))</span>
+<span class="sd">        &gt;&gt;&gt; loss_func = SingleSrcPMSQE()</span>
+<span class="sd">        &gt;&gt;&gt; loss_value = loss_func(est_spec, ref_spec)</span>
+<span class="sd">        &gt;&gt;&gt; # Usage with PITLossWrapper</span>
+<span class="sd">        &gt;&gt;&gt; loss_func = PITLossWrapper(SingleSrcPMSQE(), pit_from=&#39;pw_pt&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; ref, est = torch.randn(2, 3, 16000), torch.randn(2, 3, 16000)</span>
+<span class="sd">        &gt;&gt;&gt; ref_spec = transforms.take_mag(stft(ref))</span>
+<span class="sd">        &gt;&gt;&gt; est_spec = transforms.take_mag(stft(est))</span>
+<span class="sd">        &gt;&gt;&gt; loss_value = loss_func(ref_spec, est_spec)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">window_name</span><span class="o">=</span><span class="s2">&quot;sqrt_hann&quot;</span><span class="p">,</span>
+        <span class="n">window_weight</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">bark_eq</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">gain_eq</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">sample_rate</span><span class="o">=</span><span class="mi">16000</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_name</span> <span class="o">=</span> <span class="n">window_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_weight</span> <span class="o">=</span> <span class="n">window_weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bark_eq</span> <span class="o">=</span> <span class="n">bark_eq</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gain_eq</span> <span class="o">=</span> <span class="n">gain_eq</span>
+
+        <span class="k">if</span> <span class="n">sample_rate</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">16000</span><span class="p">,</span> <span class="mi">8000</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported sample rate </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span> <span class="o">=</span> <span class="n">sample_rate</span>
+        <span class="k">if</span> <span class="n">sample_rate</span> <span class="o">==</span> <span class="mi">16000</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Sp</span> <span class="o">=</span> <span class="mf">6.910853e-006</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Sl</span> <span class="o">=</span> <span class="mf">1.866055e-001</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbins</span> <span class="o">=</span> <span class="mi">512</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbark</span> <span class="o">=</span> <span class="mi">49</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Sp</span> <span class="o">=</span> <span class="mf">2.764344e-5</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Sl</span> <span class="o">=</span> <span class="mf">1.866055e-1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbins</span> <span class="o">=</span> <span class="mi">256</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbark</span> <span class="o">=</span> <span class="mi">42</span>
+        <span class="c1"># As described in [1] and used in the TF implementation.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mf">0.309</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span>
+
+        <span class="n">pow_correc_factor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_correction_factor</span><span class="p">(</span><span class="n">window_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pow_correc_factor</span> <span class="o">=</span> <span class="n">pow_correc_factor</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">window_weight</span>
+        <span class="c1"># Initialize to None and populate as a function of sample rate.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">abs_thresh_power</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modified_zwicker_power</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width_of_band_bark</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bark_matrix</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_sll</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">populate_constants</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sqrt_total_width</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width_of_band_bark</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">EPS</span> <span class="o">=</span> <span class="mf">1e-8</span>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.forward"><a class="viewcode-back" href="../../../package_reference/losses.html#asteroid.losses.SingleSrcPMSQE.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">est_targets</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">pad_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args</span>
+<span class="sd">            est_targets (torch.Tensor): Dimensions (B, T, F).</span>
+<span class="sd">                Padded degraded power spectrum in time-frequency domain.</span>
+<span class="sd">            targets (torch.Tensor): Dimensions (B, T, F).</span>
+<span class="sd">                Zero-Padded reference power spectrum in time-frequency domain.</span>
+<span class="sd">            pad_mask (torch.Tensor, optional):  Dimensions (B, T, 1). Mask</span>
+<span class="sd">                to indicate the padding frames. Defaults to all ones.</span>
+
+<span class="sd">        Dimensions</span>
+<span class="sd">            B: Number of sequences in the batch.</span>
+<span class="sd">            T: Number of time frames.</span>
+<span class="sd">            F: Number of frequency bins.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            torch.tensor of shape (B, ), wD + 0.309 * wDA</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">            Dimensions (B, F, T) are also supported by SingleSrcPMSQE but are</span>
+<span class="sd">            less efficient because input tensors are transposed (not inplace).</span>
+
+<span class="sd">        Examples</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">est_targets</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">targets</span><span class="o">.</span><span class="n">shape</span>
+        <span class="c1"># Need transpose? Find it out</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">freq_idx</span> <span class="o">=</span> <span class="n">est_targets</span><span class="o">.</span><span class="n">shape</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nbins</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Could not find dimension with </span><span class="si">{}</span><span class="s2"> elements in &quot;</span>
+                <span class="s2">&quot;input tensors, verify your inputs&quot;</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nbins</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">freq_idx</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">est_targets</span> <span class="o">=</span> <span class="n">est_targets</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">targets</span> <span class="o">=</span> <span class="n">targets</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pad_mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Transpose the pad mask as well if needed.</span>
+            <span class="n">pad_mask</span> <span class="o">=</span> <span class="n">pad_mask</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">freq_idx</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">pad_mask</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Suppose no padding if no pad_mask is provided.</span>
+            <span class="n">pad_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span>
+                <span class="n">est_targets</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">est_targets</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">est_targets</span><span class="o">.</span><span class="n">device</span>
+            <span class="p">)</span>
+        <span class="c1"># SLL equalization</span>
+        <span class="n">ref_spectra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnitude_at_sll</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">pad_mask</span><span class="p">)</span>
+        <span class="n">deg_spectra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnitude_at_sll</span><span class="p">(</span><span class="n">est_targets</span><span class="p">,</span> <span class="n">pad_mask</span><span class="p">)</span>
+
+        <span class="c1"># Bark spectra computation</span>
+        <span class="n">ref_bark_spectra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bark_computation</span><span class="p">(</span><span class="n">ref_spectra</span><span class="p">)</span>
+        <span class="n">deg_bark_spectra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bark_computation</span><span class="p">(</span><span class="n">deg_spectra</span><span class="p">)</span>
+
+        <span class="c1"># (Optional) frequency and gain equalization</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bark_eq</span><span class="p">:</span>
+            <span class="n">deg_bark_spectra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bark_freq_equalization</span><span class="p">(</span><span class="n">ref_bark_spectra</span><span class="p">,</span> <span class="n">deg_bark_spectra</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gain_eq</span><span class="p">:</span>
+            <span class="n">deg_bark_spectra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bark_gain_equalization</span><span class="p">(</span><span class="n">ref_bark_spectra</span><span class="p">,</span> <span class="n">deg_bark_spectra</span><span class="p">)</span>
+
+        <span class="c1"># Distortion matrix computation</span>
+        <span class="n">sym_d</span><span class="p">,</span> <span class="n">asym_d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_distortion_tensors</span><span class="p">(</span><span class="n">ref_bark_spectra</span><span class="p">,</span> <span class="n">deg_bark_spectra</span><span class="p">)</span>
+
+        <span class="c1"># Per-frame distortion</span>
+        <span class="n">audible_power_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_audible_power</span><span class="p">(</span><span class="n">ref_bark_spectra</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">wd_frame</span><span class="p">,</span> <span class="n">wda_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">per_frame_distortion</span><span class="p">(</span><span class="n">sym_d</span><span class="p">,</span> <span class="n">asym_d</span><span class="p">,</span> <span class="n">audible_power_ref</span><span class="p">)</span>
+        <span class="c1"># Mean distortions over frames : keep batch dims</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">pmsqe_frame</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">wd_frame</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">*</span> <span class="n">wda_frame</span><span class="p">)</span> <span class="o">*</span> <span class="n">pad_mask</span>
+        <span class="n">pmsqe</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pmsqe_frame</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dims</span><span class="p">)</span> <span class="o">/</span> <span class="n">pad_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pmsqe</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.magnitude_at_sll"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.magnitude_at_sll">[docs]</a>    <span class="k">def</span> <span class="nf">magnitude_at_sll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spectra</span><span class="p">,</span> <span class="n">pad_mask</span><span class="p">):</span>
+        <span class="c1"># Apply padding and SLL masking</span>
+        <span class="n">masked_spectra</span> <span class="o">=</span> <span class="n">spectra</span> <span class="o">*</span> <span class="n">pad_mask</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_sll</span>
+        <span class="c1"># Compute mean over frequency</span>
+        <span class="n">freq_mean_masked_spectra</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">masked_spectra</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># Compute mean over time (taking into account padding)</span>
+        <span class="n">sum_spectra</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">freq_mean_masked_spectra</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">seq_len</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pad_mask</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">mean_pow</span> <span class="o">=</span> <span class="n">sum_spectra</span> <span class="o">/</span> <span class="n">seq_len</span>
+        <span class="c1"># Compute final SLL spectra</span>
+        <span class="k">return</span> <span class="mf">10000000.0</span> <span class="o">*</span> <span class="n">spectra</span> <span class="o">/</span> <span class="n">mean_pow</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.bark_computation"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.bark_computation">[docs]</a>    <span class="k">def</span> <span class="nf">bark_computation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spectra</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sp</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">spectra</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bark_matrix</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.compute_audible_power"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.compute_audible_power">[docs]</a>    <span class="k">def</span> <span class="nf">compute_audible_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bark_spectra</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="c1"># Apply absolute hearing threshold to each band</span>
+        <span class="n">thr_bark</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">bark_spectra</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">abs_thresh_power</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span>
+            <span class="n">bark_spectra</span><span class="p">,</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">bark_spectra</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="c1"># Sum band power over frequency</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">thr_bark</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.bark_gain_equalization"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.bark_gain_equalization">[docs]</a>    <span class="k">def</span> <span class="nf">bark_gain_equalization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref_bark_spectra</span><span class="p">,</span> <span class="n">deg_bark_spectra</span><span class="p">):</span>
+        <span class="c1"># Compute audible power</span>
+        <span class="n">audible_power_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_audible_power</span><span class="p">(</span><span class="n">ref_bark_spectra</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">audible_power_deg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_audible_power</span><span class="p">(</span><span class="n">deg_bark_spectra</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="c1"># Compute gain factor</span>
+        <span class="n">gain</span> <span class="o">=</span> <span class="p">(</span><span class="n">audible_power_ref</span> <span class="o">+</span> <span class="mf">5.0e3</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">audible_power_deg</span> <span class="o">+</span> <span class="mf">5.0e3</span><span class="p">)</span>
+        <span class="c1"># Limit the range of the gain factor</span>
+        <span class="n">limited_gain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">gain</span><span class="p">))</span>
+        <span class="n">limited_gain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">limited_gain</span><span class="p">,</span> <span class="mf">3.0e-4</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">limited_gain</span><span class="p">))</span>
+        <span class="c1"># Apply gain correction on degraded</span>
+        <span class="k">return</span> <span class="n">limited_gain</span> <span class="o">*</span> <span class="n">deg_bark_spectra</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.bark_freq_equalization"><a class="viewcode-back" href="../../../package_reference/losses.html#asteroid.losses.SingleSrcPMSQE.bark_freq_equalization">[docs]</a>    <span class="k">def</span> <span class="nf">bark_freq_equalization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref_bark_spectra</span><span class="p">,</span> <span class="n">deg_bark_spectra</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This version is applied in the degraded directly.&quot;&quot;&quot;</span>
+        <span class="c1"># Identification of speech active frames</span>
+        <span class="n">audible_power_x100</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_audible_power</span><span class="p">(</span><span class="n">ref_bark_spectra</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span>
+        <span class="n">not_silent</span> <span class="o">=</span> <span class="n">audible_power_x100</span> <span class="o">&gt;=</span> <span class="mf">1.0e7</span>
+        <span class="c1"># Threshold for active bark bins</span>
+        <span class="n">cond_thr</span> <span class="o">=</span> <span class="n">ref_bark_spectra</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">abs_thresh_power</span> <span class="o">*</span> <span class="mf">100.0</span>
+        <span class="n">ref_thresholded</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">cond_thr</span><span class="p">,</span> <span class="n">ref_bark_spectra</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">ref_bark_spectra</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">deg_thresholded</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">cond_thr</span><span class="p">,</span> <span class="n">deg_bark_spectra</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">deg_bark_spectra</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># Total power per bark bin (ppb)</span>
+        <span class="n">avg_ppb_ref</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">not_silent</span><span class="p">,</span> <span class="n">ref_thresholded</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">ref_thresholded</span><span class="p">)),</span>
+            <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">avg_ppb_deg</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">not_silent</span><span class="p">,</span> <span class="n">deg_thresholded</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">deg_thresholded</span><span class="p">)),</span>
+            <span class="n">dim</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># Compute equalizer</span>
+        <span class="n">equalizer</span> <span class="o">=</span> <span class="p">(</span><span class="n">avg_ppb_ref</span> <span class="o">+</span> <span class="mf">1000.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">avg_ppb_deg</span> <span class="o">+</span> <span class="mf">1000.0</span><span class="p">)</span>
+        <span class="n">equalizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">equalizer</span><span class="p">,</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">equalizer</span><span class="p">))</span>
+        <span class="n">equalizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">equalizer</span><span class="p">,</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">equalizer</span><span class="p">))</span>
+        <span class="c1"># Apply frequency correction on degraded</span>
+        <span class="k">return</span> <span class="n">equalizer</span> <span class="o">*</span> <span class="n">deg_bark_spectra</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.loudness_computation"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.loudness_computation">[docs]</a>    <span class="k">def</span> <span class="nf">loudness_computation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bark_spectra</span><span class="p">):</span>
+        <span class="c1"># Bark spectra transformed to a sone loudness scale using Zwicker&#39;s law</span>
+        <span class="n">aterm</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">abs_thresh_power</span> <span class="o">/</span> <span class="mf">0.5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modified_zwicker_power</span><span class="p">)</span>
+        <span class="n">bterm</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">bark_spectra</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">abs_thresh_power</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modified_zwicker_power</span><span class="p">)</span>
+            <span class="o">-</span> <span class="mf">1.0</span>
+        <span class="p">)</span>
+        <span class="n">loudness_dens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sl</span> <span class="o">*</span> <span class="n">aterm</span> <span class="o">*</span> <span class="n">bterm</span>
+        <span class="n">cond</span> <span class="o">=</span> <span class="n">bark_spectra</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">abs_thresh_power</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">loudness_dens</span><span class="p">),</span> <span class="n">loudness_dens</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.compute_distortion_tensors"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.compute_distortion_tensors">[docs]</a>    <span class="k">def</span> <span class="nf">compute_distortion_tensors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref_bark_spec</span><span class="p">,</span> <span class="n">deg_bark_spec</span><span class="p">):</span>
+        <span class="c1"># After bark spectra are compensated, transform to sone loudness</span>
+        <span class="n">original_loudness</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loudness_computation</span><span class="p">(</span><span class="n">ref_bark_spec</span><span class="p">)</span>
+        <span class="n">distorted_loudness</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loudness_computation</span><span class="p">(</span><span class="n">deg_bark_spec</span><span class="p">)</span>
+        <span class="c1"># Loudness difference</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">distorted_loudness</span> <span class="o">-</span> <span class="n">original_loudness</span><span class="p">)</span>
+        <span class="c1"># Masking effect computation</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">original_loudness</span><span class="p">,</span> <span class="n">distorted_loudness</span><span class="p">)</span>
+        <span class="c1"># Center clipping using masking effect</span>
+        <span class="n">sym_d</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">EPS</span><span class="p">)</span>
+        <span class="c1"># Asymmetry factor computation</span>
+        <span class="n">asym</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">deg_bark_spec</span> <span class="o">+</span> <span class="mf">50.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ref_bark_spec</span> <span class="o">+</span> <span class="mf">50.0</span><span class="p">),</span> <span class="mf">1.2</span><span class="p">)</span>
+        <span class="n">cond</span> <span class="o">=</span> <span class="n">asym</span> <span class="o">&lt;</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">asym</span><span class="p">)</span>
+        <span class="n">asym_factor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">cond</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">asym</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">asym</span><span class="p">,</span> <span class="mf">12.0</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">asym</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="c1"># Asymmetric Disturbance matrix computation</span>
+        <span class="n">asym_d</span> <span class="o">=</span> <span class="n">asym_factor</span> <span class="o">*</span> <span class="n">sym_d</span>
+        <span class="k">return</span> <span class="n">sym_d</span><span class="p">,</span> <span class="n">asym_d</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.per_frame_distortion"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.per_frame_distortion">[docs]</a>    <span class="k">def</span> <span class="nf">per_frame_distortion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sym_d</span><span class="p">,</span> <span class="n">asym_d</span><span class="p">,</span> <span class="n">total_power_ref</span><span class="p">):</span>
+        <span class="c1"># Computation of the norms over bark bands for each frame</span>
+        <span class="c1"># 2 and 1 for sym_d and asym_d, respectively</span>
+        <span class="n">d_frame</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">sym_d</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">width_of_band_bark</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">EPS</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="c1"># a = torch.pow(sym_d * self.width_of_band_bark, 2.0)</span>
+        <span class="c1"># b = sym_d</span>
+        <span class="c1"># print(a.min(),a.max(),b.min(),b.max(), d_frame.min(), d_frame.max())</span>
+        <span class="c1"># print(self.width_of_band_bark.requires_grad)</span>
+        <span class="c1"># print(d_frame.requires_grad)</span>
+        <span class="n">d_frame</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d_frame</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sqrt_total_width</span>
+        <span class="n">da_frame</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">asym_d</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">width_of_band_bark</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># Weighting by the audible power raised to 0.04</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">total_power_ref</span> <span class="o">+</span> <span class="mf">1e5</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">)</span>
+        <span class="c1"># Bounded computation of the per frame distortion metric</span>
+        <span class="n">wd_frame</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">d_frame</span> <span class="o">/</span> <span class="n">weights</span><span class="p">,</span> <span class="mf">45.0</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">d_frame</span><span class="p">))</span>
+        <span class="n">wda_frame</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">da_frame</span> <span class="o">/</span> <span class="n">weights</span><span class="p">,</span> <span class="mf">45.0</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">da_frame</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">wd_frame</span><span class="p">,</span> <span class="n">wda_frame</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.get_correction_factor"><a class="viewcode-back" href="../../../package_reference/losses.html#asteroid.losses.SingleSrcPMSQE.get_correction_factor">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_correction_factor</span><span class="p">(</span><span class="n">window_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the power correction factor depending on the window. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">window_name</span> <span class="o">==</span> <span class="s2">&quot;rect&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">1.0</span>
+        <span class="k">elif</span> <span class="n">window_name</span> <span class="o">==</span> <span class="s2">&quot;hann&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">2.666666666666754</span>
+        <span class="k">elif</span> <span class="n">window_name</span> <span class="o">==</span> <span class="s2">&quot;sqrt_hann&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">2.0</span>
+        <span class="k">elif</span> <span class="n">window_name</span> <span class="o">==</span> <span class="s2">&quot;hamming&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">2.51635879188799</span>
+        <span class="k">elif</span> <span class="n">window_name</span> <span class="o">==</span> <span class="s2">&quot;flatTop&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">5.70713295690759</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unexpected window type </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">window_name</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.populate_constants"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.populate_constants">[docs]</a>    <span class="k">def</span> <span class="nf">populate_constants</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample_rate</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sample_rate</span> <span class="o">==</span> <span class="mi">8000</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_8k_constants</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">sample_rate</span> <span class="o">==</span> <span class="mi">16000</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">register_16k_constants</span><span class="p">()</span>
+        <span class="c1"># Mask SSL</span>
+        <span class="n">mask_sll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nbins</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">mask_sll</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="mf">25.0</span> <span class="o">/</span> <span class="mf">31.25</span>
+        <span class="n">mask_sll</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">104</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">mask_sll</span><span class="p">[</span><span class="mi">104</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">correction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pow_correc_factor</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nbins</span> <span class="o">+</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbins</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">mask_sll</span> <span class="o">=</span> <span class="n">mask_sll</span> <span class="o">*</span> <span class="n">correction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_sll</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">tensor</span><span class="p">(</span><span class="n">mask_sll</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.register_16k_constants"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.register_16k_constants">[docs]</a>    <span class="k">def</span> <span class="nf">register_16k_constants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Absolute threshold power</span>
+        <span class="n">abs_thresh_power</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">51286152.00</span><span class="p">,</span>
+            <span class="mf">2454709.500</span><span class="p">,</span>
+            <span class="mf">70794.593750</span><span class="p">,</span>
+            <span class="mf">4897.788574</span><span class="p">,</span>
+            <span class="mf">1174.897705</span><span class="p">,</span>
+            <span class="mf">389.045166</span><span class="p">,</span>
+            <span class="mf">104.712860</span><span class="p">,</span>
+            <span class="mf">45.708820</span><span class="p">,</span>
+            <span class="mf">17.782795</span><span class="p">,</span>
+            <span class="mf">9.772372</span><span class="p">,</span>
+            <span class="mf">4.897789</span><span class="p">,</span>
+            <span class="mf">3.090296</span><span class="p">,</span>
+            <span class="mf">1.905461</span><span class="p">,</span>
+            <span class="mf">1.258925</span><span class="p">,</span>
+            <span class="mf">0.977237</span><span class="p">,</span>
+            <span class="mf">0.724436</span><span class="p">,</span>
+            <span class="mf">0.562341</span><span class="p">,</span>
+            <span class="mf">0.457088</span><span class="p">,</span>
+            <span class="mf">0.389045</span><span class="p">,</span>
+            <span class="mf">0.331131</span><span class="p">,</span>
+            <span class="mf">0.295121</span><span class="p">,</span>
+            <span class="mf">0.269153</span><span class="p">,</span>
+            <span class="mf">0.257040</span><span class="p">,</span>
+            <span class="mf">0.251189</span><span class="p">,</span>
+            <span class="mf">0.251189</span><span class="p">,</span>
+            <span class="mf">0.251189</span><span class="p">,</span>
+            <span class="mf">0.251189</span><span class="p">,</span>
+            <span class="mf">0.263027</span><span class="p">,</span>
+            <span class="mf">0.288403</span><span class="p">,</span>
+            <span class="mf">0.309030</span><span class="p">,</span>
+            <span class="mf">0.338844</span><span class="p">,</span>
+            <span class="mf">0.371535</span><span class="p">,</span>
+            <span class="mf">0.398107</span><span class="p">,</span>
+            <span class="mf">0.436516</span><span class="p">,</span>
+            <span class="mf">0.467735</span><span class="p">,</span>
+            <span class="mf">0.489779</span><span class="p">,</span>
+            <span class="mf">0.501187</span><span class="p">,</span>
+            <span class="mf">0.501187</span><span class="p">,</span>
+            <span class="mf">0.512861</span><span class="p">,</span>
+            <span class="mf">0.524807</span><span class="p">,</span>
+            <span class="mf">0.524807</span><span class="p">,</span>
+            <span class="mf">0.524807</span><span class="p">,</span>
+            <span class="mf">0.512861</span><span class="p">,</span>
+            <span class="mf">0.478630</span><span class="p">,</span>
+            <span class="mf">0.426580</span><span class="p">,</span>
+            <span class="mf">0.371535</span><span class="p">,</span>
+            <span class="mf">0.363078</span><span class="p">,</span>
+            <span class="mf">0.416869</span><span class="p">,</span>
+            <span class="mf">0.537032</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">abs_thresh_power</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">tensor</span><span class="p">(</span><span class="n">abs_thresh_power</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Modified zwicker power</span>
+        <span class="n">modif_zwicker_power</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">0.25520097857560436</span><span class="p">,</span>
+            <span class="mf">0.25520097857560436</span><span class="p">,</span>
+            <span class="mf">0.25520097857560436</span><span class="p">,</span>
+            <span class="mf">0.25520097857560436</span><span class="p">,</span>
+            <span class="mf">0.25168783742879913</span><span class="p">,</span>
+            <span class="mf">0.24806665731869609</span><span class="p">,</span>
+            <span class="mf">0.244767379124259</span><span class="p">,</span>
+            <span class="mf">0.24173800119368227</span><span class="p">,</span>
+            <span class="mf">0.23893798876066405</span><span class="p">,</span>
+            <span class="mf">0.23633516221479894</span><span class="p">,</span>
+            <span class="mf">0.23390360348392067</span><span class="p">,</span>
+            <span class="mf">0.23162209128929445</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modified_zwicker_power</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">tensor</span><span class="p">(</span><span class="n">modif_zwicker_power</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Width of band bark</span>
+        <span class="n">width_of_band_bark</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">0.157344</span><span class="p">,</span>
+            <span class="mf">0.317994</span><span class="p">,</span>
+            <span class="mf">0.322441</span><span class="p">,</span>
+            <span class="mf">0.326934</span><span class="p">,</span>
+            <span class="mf">0.331474</span><span class="p">,</span>
+            <span class="mf">0.336061</span><span class="p">,</span>
+            <span class="mf">0.340697</span><span class="p">,</span>
+            <span class="mf">0.345381</span><span class="p">,</span>
+            <span class="mf">0.350114</span><span class="p">,</span>
+            <span class="mf">0.354897</span><span class="p">,</span>
+            <span class="mf">0.359729</span><span class="p">,</span>
+            <span class="mf">0.364611</span><span class="p">,</span>
+            <span class="mf">0.369544</span><span class="p">,</span>
+            <span class="mf">0.374529</span><span class="p">,</span>
+            <span class="mf">0.379565</span><span class="p">,</span>
+            <span class="mf">0.384653</span><span class="p">,</span>
+            <span class="mf">0.389794</span><span class="p">,</span>
+            <span class="mf">0.394989</span><span class="p">,</span>
+            <span class="mf">0.400236</span><span class="p">,</span>
+            <span class="mf">0.405538</span><span class="p">,</span>
+            <span class="mf">0.410894</span><span class="p">,</span>
+            <span class="mf">0.416306</span><span class="p">,</span>
+            <span class="mf">0.421773</span><span class="p">,</span>
+            <span class="mf">0.427297</span><span class="p">,</span>
+            <span class="mf">0.432877</span><span class="p">,</span>
+            <span class="mf">0.438514</span><span class="p">,</span>
+            <span class="mf">0.444209</span><span class="p">,</span>
+            <span class="mf">0.449962</span><span class="p">,</span>
+            <span class="mf">0.455774</span><span class="p">,</span>
+            <span class="mf">0.461645</span><span class="p">,</span>
+            <span class="mf">0.467577</span><span class="p">,</span>
+            <span class="mf">0.473569</span><span class="p">,</span>
+            <span class="mf">0.479621</span><span class="p">,</span>
+            <span class="mf">0.485736</span><span class="p">,</span>
+            <span class="mf">0.491912</span><span class="p">,</span>
+            <span class="mf">0.498151</span><span class="p">,</span>
+            <span class="mf">0.504454</span><span class="p">,</span>
+            <span class="mf">0.510819</span><span class="p">,</span>
+            <span class="mf">0.517250</span><span class="p">,</span>
+            <span class="mf">0.523745</span><span class="p">,</span>
+            <span class="mf">0.530308</span><span class="p">,</span>
+            <span class="mf">0.536934</span><span class="p">,</span>
+            <span class="mf">0.543629</span><span class="p">,</span>
+            <span class="mf">0.550390</span><span class="p">,</span>
+            <span class="mf">0.557220</span><span class="p">,</span>
+            <span class="mf">0.564119</span><span class="p">,</span>
+            <span class="mf">0.571085</span><span class="p">,</span>
+            <span class="mf">0.578125</span><span class="p">,</span>
+            <span class="mf">0.585232</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width_of_band_bark</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">tensor</span><span class="p">(</span><span class="n">width_of_band_bark</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Bark matrix</span>
+        <span class="n">local_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+        <span class="n">bark_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span> <span class="s2">&quot;bark_matrix_16k.mat&quot;</span><span class="p">)</span>
+        <span class="n">bark_matrix</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="n">bark_path</span><span class="p">)[</span><span class="s2">&quot;Bark_matrix_16k&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bark_matrix</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">tensor</span><span class="p">(</span><span class="n">bark_matrix</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SingleSrcPMSQE.register_8k_constants"><a class="viewcode-back" href="../../../apidoc/asteroid.losses.pmsqe.html#asteroid.losses.SingleSrcPMSQE.register_8k_constants">[docs]</a>    <span class="k">def</span> <span class="nf">register_8k_constants</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Absolute threshold power</span>
+        <span class="n">abs_thresh_power</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mi">51286152</span><span class="p">,</span>
+            <span class="mf">2454709.500</span><span class="p">,</span>
+            <span class="mf">70794.593750</span><span class="p">,</span>
+            <span class="mf">4897.788574</span><span class="p">,</span>
+            <span class="mf">1174.897705</span><span class="p">,</span>
+            <span class="mf">389.045166</span><span class="p">,</span>
+            <span class="mf">104.712860</span><span class="p">,</span>
+            <span class="mf">45.708820</span><span class="p">,</span>
+            <span class="mf">17.782795</span><span class="p">,</span>
+            <span class="mf">9.772372</span><span class="p">,</span>
+            <span class="mf">4.897789</span><span class="p">,</span>
+            <span class="mf">3.090296</span><span class="p">,</span>
+            <span class="mf">1.905461</span><span class="p">,</span>
+            <span class="mf">1.258925</span><span class="p">,</span>
+            <span class="mf">0.977237</span><span class="p">,</span>
+            <span class="mf">0.724436</span><span class="p">,</span>
+            <span class="mf">0.562341</span><span class="p">,</span>
+            <span class="mf">0.457088</span><span class="p">,</span>
+            <span class="mf">0.389045</span><span class="p">,</span>
+            <span class="mf">0.331131</span><span class="p">,</span>
+            <span class="mf">0.295121</span><span class="p">,</span>
+            <span class="mf">0.269153</span><span class="p">,</span>
+            <span class="mf">0.257040</span><span class="p">,</span>
+            <span class="mf">0.251189</span><span class="p">,</span>
+            <span class="mf">0.251189</span><span class="p">,</span>
+            <span class="mf">0.251189</span><span class="p">,</span>
+            <span class="mf">0.251189</span><span class="p">,</span>
+            <span class="mf">0.263027</span><span class="p">,</span>
+            <span class="mf">0.288403</span><span class="p">,</span>
+            <span class="mf">0.309030</span><span class="p">,</span>
+            <span class="mf">0.338844</span><span class="p">,</span>
+            <span class="mf">0.371535</span><span class="p">,</span>
+            <span class="mf">0.398107</span><span class="p">,</span>
+            <span class="mf">0.436516</span><span class="p">,</span>
+            <span class="mf">0.467735</span><span class="p">,</span>
+            <span class="mf">0.489779</span><span class="p">,</span>
+            <span class="mf">0.501187</span><span class="p">,</span>
+            <span class="mf">0.501187</span><span class="p">,</span>
+            <span class="mf">0.512861</span><span class="p">,</span>
+            <span class="mf">0.524807</span><span class="p">,</span>
+            <span class="mf">0.524807</span><span class="p">,</span>
+            <span class="mf">0.524807</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">abs_thresh_power</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">tensor</span><span class="p">(</span><span class="n">abs_thresh_power</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Modified zwicker power</span>
+        <span class="n">modif_zwicker_power</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">0.25520097857560436</span><span class="p">,</span>
+            <span class="mf">0.25520097857560436</span><span class="p">,</span>
+            <span class="mf">0.25520097857560436</span><span class="p">,</span>
+            <span class="mf">0.25520097857560436</span><span class="p">,</span>
+            <span class="mf">0.25168783742879913</span><span class="p">,</span>
+            <span class="mf">0.24806665731869609</span><span class="p">,</span>
+            <span class="mf">0.244767379124259</span><span class="p">,</span>
+            <span class="mf">0.24173800119368227</span><span class="p">,</span>
+            <span class="mf">0.23893798876066405</span><span class="p">,</span>
+            <span class="mf">0.23633516221479894</span><span class="p">,</span>
+            <span class="mf">0.23390360348392067</span><span class="p">,</span>
+            <span class="mf">0.23162209128929445</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+            <span class="mf">0.23</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modified_zwicker_power</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">tensor</span><span class="p">(</span><span class="n">modif_zwicker_power</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Width of band bark</span>
+        <span class="n">width_of_band_bark</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mf">0.157344</span><span class="p">,</span>
+            <span class="mf">0.317994</span><span class="p">,</span>
+            <span class="mf">0.322441</span><span class="p">,</span>
+            <span class="mf">0.326934</span><span class="p">,</span>
+            <span class="mf">0.331474</span><span class="p">,</span>
+            <span class="mf">0.336061</span><span class="p">,</span>
+            <span class="mf">0.340697</span><span class="p">,</span>
+            <span class="mf">0.345381</span><span class="p">,</span>
+            <span class="mf">0.350114</span><span class="p">,</span>
+            <span class="mf">0.354897</span><span class="p">,</span>
+            <span class="mf">0.359729</span><span class="p">,</span>
+            <span class="mf">0.364611</span><span class="p">,</span>
+            <span class="mf">0.369544</span><span class="p">,</span>
+            <span class="mf">0.374529</span><span class="p">,</span>
+            <span class="mf">0.379565</span><span class="p">,</span>
+            <span class="mf">0.384653</span><span class="p">,</span>
+            <span class="mf">0.389794</span><span class="p">,</span>
+            <span class="mf">0.394989</span><span class="p">,</span>
+            <span class="mf">0.400236</span><span class="p">,</span>
+            <span class="mf">0.405538</span><span class="p">,</span>
+            <span class="mf">0.410894</span><span class="p">,</span>
+            <span class="mf">0.416306</span><span class="p">,</span>
+            <span class="mf">0.421773</span><span class="p">,</span>
+            <span class="mf">0.427297</span><span class="p">,</span>
+            <span class="mf">0.432877</span><span class="p">,</span>
+            <span class="mf">0.438514</span><span class="p">,</span>
+            <span class="mf">0.444209</span><span class="p">,</span>
+            <span class="mf">0.449962</span><span class="p">,</span>
+            <span class="mf">0.455774</span><span class="p">,</span>
+            <span class="mf">0.461645</span><span class="p">,</span>
+            <span class="mf">0.467577</span><span class="p">,</span>
+            <span class="mf">0.473569</span><span class="p">,</span>
+            <span class="mf">0.479621</span><span class="p">,</span>
+            <span class="mf">0.485736</span><span class="p">,</span>
+            <span class="mf">0.491912</span><span class="p">,</span>
+            <span class="mf">0.498151</span><span class="p">,</span>
+            <span class="mf">0.504454</span><span class="p">,</span>
+            <span class="mf">0.510819</span><span class="p">,</span>
+            <span class="mf">0.517250</span><span class="p">,</span>
+            <span class="mf">0.523745</span><span class="p">,</span>
+            <span class="mf">0.530308</span><span class="p">,</span>
+            <span class="mf">0.536934</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width_of_band_bark</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">tensor</span><span class="p">(</span><span class="n">width_of_band_bark</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Bark matrix</span>
+        <span class="n">local_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+        <span class="n">bark_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span> <span class="s2">&quot;bark_matrix_8k.mat&quot;</span><span class="p">)</span>
+        <span class="n">bark_matrix</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="n">bark_path</span><span class="p">)[</span><span class="s2">&quot;Bark_matrix_8k&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bark_matrix</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">tensor</span><span class="p">(</span><span class="n">bark_matrix</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div></div>
+</pre></div>
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Oncoming.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+         <script src="../../../_static/jquery.js"></script>
+         <script src="../../../_static/underscore.js"></script>
+         <script src="../../../_static/doctools.js"></script>
+         <script src="../../../_static/language_data.js"></script>
+         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+     
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../../../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <!--
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for PyTorch</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <a class="with-right-arrow" href="">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Resources</a>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="https://mpariente.github.io/asteroid/" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+
+        <div class="footer-logo-col">
+          <img class="footer-logo-img" src="../../../_static/images/dark_asteroid_logo.svg"/>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Asteroid</a></li>
+            <li><a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Features</a></li>
+            <li><a href="">Ecosystem</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Blog</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Support</a></li>
+            <li><a href="">Tutorials</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Docs</a></li>
+            <li><a href="https://discuss.pytorch.org" target="_blank">Discuss</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/issues" target="_blank">Github Issues</a></li>
+            <li><a href="" target="_blank">Slack</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/blob/master/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col follow-us-col">
+          <ul>
+            <li class="list-title">Follow Us</li>
+            <li>
+              <div id="mc_embed_signup">
+                <form
+                  action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="email-subscribe-form validate"
+                  target="_blank"
+                  novalidate>
+                  <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
+                    <div class="mc-field-group">
+                      <label for="mce-EMAIL" style="display:none;">Email Address</label>
+                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
+                    </div>
+
+                    <div id="mce-responses" class="clear">
+                      <div class="response" id="mce-error-response" style="display:none"></div>
+                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
+
+                    <div class="clear">
+                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button email-subscribe-button">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </li>
+          </ul>
+
+          <div class="footer-social-icons">
+            <a href="" target="_blank" class="facebook"></a>
+            <a href="https://twitter.com/" target="_blank" class="twitter"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer> -->
+
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch Lightning"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Features</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Resources</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../../../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

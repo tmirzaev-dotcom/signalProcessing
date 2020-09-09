@@ -1,0 +1,905 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>asteroid package &mdash; asteroid 0.4.0alpha documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://github.com/mpariente/asteroidapidoc/asteroid.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch">
+       <!-- <img class="call-to-action-img" src="../_static/images/asteroid_logo_dark.png"/> -->
+      </a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <div class="resources-dropdown">
+              <a id="resourcesDropdownButton" data-toggle="resources-dropdown">
+                Resources
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/"">
+                  <span class=dropdown-title>Developer Resources</span>
+                  <p>Find resources and get questions answered</p>
+                </a>
+                <!--
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/">
+                  <span class=dropdown-title>About</span>
+                  <p>Learn about PyTorch’s features and capabilities</p>
+                </a>
+                -->
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.4.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Start here</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../why_use_asteroid.html">What is Asteroid?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Asteroid</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../readmes/egs_README.html">What is a recipe?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supported_datasets.html">Datasets and tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training_and_evaluation.html">Training and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readmes/pretrained_models.html">Pretrained models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notebooks and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">NB: Getting stated with Asteroid</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/02_Filterbank.ipynb">NB: Understanding the Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/03_PITLossWrapper.ipynb">NB: Our PITLossWrapper explained</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/04_ProcessLargeAudioFiles.ipynb">NB: Processing large wav files</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://colab.research.google.com/drive/1BDNQZBJCDcwQhSguf3XBE7ff2KXhWu_j">Community NB: Numpy vs. Asteroid STFT</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/data.html">PyTorch Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/filterbanks.html">Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/blocks.html">DNN building blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/losses.html">Losses &amp; Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/system.html">Lightning Wrapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/optimizers.html">Optimizers &amp; Schedulers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/dsp.html">DSP Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../package_reference/cli.html">CLI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contribution_guide.html">Asteroid High-Level Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readmes/CONTRIBUTING.html">How to contribute</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+      <li>asteroid package</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/apidoc/asteroid.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="module-asteroid">
+<span id="asteroid-package"></span><h1>asteroid package<a class="headerlink" href="#module-asteroid" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="asteroid.ConvTasNet">
+<em class="property">class </em><code class="sig-prename descclassname">asteroid.</code><code class="sig-name descname">ConvTasNet</code><span class="sig-paren">(</span><em class="sig-param">n_src</em>, <em class="sig-param">out_chan=None</em>, <em class="sig-param">n_blocks=8</em>, <em class="sig-param">n_repeats=3</em>, <em class="sig-param">bn_chan=128</em>, <em class="sig-param">hid_chan=512</em>, <em class="sig-param">skip_chan=128</em>, <em class="sig-param">conv_kernel_size=3</em>, <em class="sig-param">norm_type='gLN'</em>, <em class="sig-param">mask_act='sigmoid'</em>, <em class="sig-param">in_chan=None</em>, <em class="sig-param">fb_name='free'</em>, <em class="sig-param">kernel_size=16</em>, <em class="sig-param">n_filters=512</em>, <em class="sig-param">stride=8</em>, <em class="sig-param">encoder_activation='relu'</em>, <em class="sig-param">**fb_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/asteroid/models/conv_tasnet.html#ConvTasNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asteroid.ConvTasNet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../package_reference/models.html#asteroid.models.base_models.BaseTasNet" title="asteroid.models.base_models.BaseTasNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">asteroid.models.base_models.BaseTasNet</span></code></a></p>
+<p>ConvTasNet separation model, as described in [1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_src</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of sources in the input mixtures.</p></li>
+<li><p><strong>out_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of bins in the estimated masks.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, <cite>out_chan = in_chan</cite>.</p></li>
+<li><p><strong>n_blocks</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of convolutional blocks in each
+repeat. Defaults to 8.</p></li>
+<li><p><strong>n_repeats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of repeats. Defaults to 3.</p></li>
+<li><p><strong>bn_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of channels after the bottleneck.</p></li>
+<li><p><strong>hid_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of channels in the convolutional
+blocks.</p></li>
+<li><p><strong>skip_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of channels in the skip connections.
+If 0 or None, TDConvNet won’t have any skip connections and the
+masks will be computed from the residual output.
+Corresponds to the ConvTasnet architecture in v1 or the paper.</p></li>
+<li><p><strong>conv_kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Kernel size in convolutional blocks.</p></li>
+<li><p><strong>norm_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – To choose from <code class="docutils literal notranslate"><span class="pre">'BN'</span></code>, <code class="docutils literal notranslate"><span class="pre">'gLN'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'cLN'</span></code>.</p></li>
+<li><p><strong>mask_act</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Which non-linear function to generate mask.</p></li>
+<li><p><strong>in_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of input channels, should be equal to
+n_filters.</p></li>
+<li><p><strong>fb_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>className</em>) – Filterbank family from which to make encoder
+and decoder. To choose among [<code class="docutils literal notranslate"><span class="pre">'free'</span></code>, <code class="docutils literal notranslate"><span class="pre">'analytic_free'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'param_sinc'</span></code>, <code class="docutils literal notranslate"><span class="pre">'stft'</span></code>].</p></li>
+<li><p><strong>n_filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of filters / Input dimension of the masker net.</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Length of the filters.</p></li>
+<li><p><strong>stride</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Stride of the convolution.
+If None (default), set to <code class="docutils literal notranslate"><span class="pre">kernel_size</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>**fb_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Additional kwards to pass to the filterbank
+creation.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>[1] : “Conv-TasNet: Surpassing ideal time-frequency magnitude masking
+for speech separation” TASLP 2019 Yi Luo, Nima Mesgarani
+<a class="reference external" href="https://arxiv.org/abs/1809.07454">https://arxiv.org/abs/1809.07454</a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="asteroid.DPRNNTasNet">
+<em class="property">class </em><code class="sig-prename descclassname">asteroid.</code><code class="sig-name descname">DPRNNTasNet</code><span class="sig-paren">(</span><em class="sig-param">n_src</em>, <em class="sig-param">out_chan=None</em>, <em class="sig-param">bn_chan=128</em>, <em class="sig-param">hid_size=128</em>, <em class="sig-param">chunk_size=100</em>, <em class="sig-param">hop_size=None</em>, <em class="sig-param">n_repeats=6</em>, <em class="sig-param">norm_type='gLN'</em>, <em class="sig-param">mask_act='sigmoid'</em>, <em class="sig-param">bidirectional=True</em>, <em class="sig-param">rnn_type='LSTM'</em>, <em class="sig-param">num_layers=1</em>, <em class="sig-param">dropout=0</em>, <em class="sig-param">in_chan=None</em>, <em class="sig-param">fb_name='free'</em>, <em class="sig-param">kernel_size=16</em>, <em class="sig-param">n_filters=64</em>, <em class="sig-param">stride=8</em>, <em class="sig-param">encoder_activation='relu'</em>, <em class="sig-param">**fb_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/asteroid/models/dprnn_tasnet.html#DPRNNTasNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asteroid.DPRNNTasNet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../package_reference/models.html#asteroid.models.base_models.BaseTasNet" title="asteroid.models.base_models.BaseTasNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">asteroid.models.base_models.BaseTasNet</span></code></a></p>
+<p>DPRNN separation model, as described in [1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_src</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of masks to estimate.</p></li>
+<li><p><strong>out_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a>) – Number of bins in the estimated masks.
+Defaults to <cite>in_chan</cite>.</p></li>
+<li><p><strong>bn_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of channels after the bottleneck.
+Defaults to 128.</p></li>
+<li><p><strong>hid_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of neurons in the RNNs cell state.
+Defaults to 128.</p></li>
+<li><p><strong>chunk_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – window size of overlap and add processing.
+Defaults to 100.</p></li>
+<li><p><strong>hop_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a>) – hop size (stride) of overlap and add processing.
+Default to <cite>chunk_size // 2</cite> (50% overlap).</p></li>
+<li><p><strong>n_repeats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of repeats. Defaults to 6.</p></li>
+<li><p><strong>norm_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Type of normalization to use. To choose from</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">'gLN'</span></code>: global Layernorm</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'cLN'</span></code>: channelwise Layernorm</p></li>
+</ul>
+</p></li>
+<li><p><strong>mask_act</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Which non-linear function to generate mask.</p></li>
+<li><p><strong>bidirectional</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – True for bidirectional Inter-Chunk RNN
+(Intra-Chunk is always bidirectional).</p></li>
+<li><p><strong>rnn_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Type of RNN used. Choose between <code class="docutils literal notranslate"><span class="pre">'RNN'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'LSTM'</span></code> and <code class="docutils literal notranslate"><span class="pre">'GRU'</span></code>.</p></li>
+<li><p><strong>num_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of layers in each RNN.</p></li>
+<li><p><strong>dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Dropout ratio, must be in [0,1].</p></li>
+<li><p><strong>in_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of input channels, should be equal to
+n_filters.</p></li>
+<li><p><strong>fb_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>className</em>) – Filterbank family from which to make encoder
+and decoder. To choose among [<code class="docutils literal notranslate"><span class="pre">'free'</span></code>, <code class="docutils literal notranslate"><span class="pre">'analytic_free'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'param_sinc'</span></code>, <code class="docutils literal notranslate"><span class="pre">'stft'</span></code>].</p></li>
+<li><p><strong>n_filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of filters / Input dimension of the masker net.</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Length of the filters.</p></li>
+<li><p><strong>stride</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Stride of the convolution.
+If None (default), set to <code class="docutils literal notranslate"><span class="pre">kernel_size</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>**fb_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Additional kwards to pass to the filterbank
+creation.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="simple">
+<dt>[1] “Dual-path RNN: efficient long sequence modeling for</dt><dd><p>time-domain single-channel speech separation”, Yi Luo, Zhuo Chen
+and Takuya Yoshioka. <a class="reference external" href="https://arxiv.org/abs/1910.06379">https://arxiv.org/abs/1910.06379</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="asteroid.DPTNet">
+<em class="property">class </em><code class="sig-prename descclassname">asteroid.</code><code class="sig-name descname">DPTNet</code><span class="sig-paren">(</span><em class="sig-param">n_src</em>, <em class="sig-param">ff_hid=256</em>, <em class="sig-param">chunk_size=100</em>, <em class="sig-param">hop_size=None</em>, <em class="sig-param">n_repeats=6</em>, <em class="sig-param">norm_type='gLN'</em>, <em class="sig-param">ff_activation='relu'</em>, <em class="sig-param">encoder_activation='relu'</em>, <em class="sig-param">mask_act='relu'</em>, <em class="sig-param">bidirectional=True</em>, <em class="sig-param">dropout=0</em>, <em class="sig-param">in_chan=None</em>, <em class="sig-param">fb_name='free'</em>, <em class="sig-param">kernel_size=16</em>, <em class="sig-param">n_filters=64</em>, <em class="sig-param">stride=8</em>, <em class="sig-param">**fb_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/asteroid/models/dptnet.html#DPTNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asteroid.DPTNet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../package_reference/models.html#asteroid.models.base_models.BaseTasNet" title="asteroid.models.base_models.BaseTasNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">asteroid.models.base_models.BaseTasNet</span></code></a></p>
+<p>DPTNet separation model, as described in [1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_src</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of masks to estimate.</p></li>
+<li><p><strong>out_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a>) – Number of bins in the estimated masks.
+Defaults to <cite>in_chan</cite>.</p></li>
+<li><p><strong>bn_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of channels after the bottleneck.
+Defaults to 128.</p></li>
+<li><p><strong>hid_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of neurons in the RNNs cell state.
+Defaults to 128.</p></li>
+<li><p><strong>chunk_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – window size of overlap and add processing.
+Defaults to 100.</p></li>
+<li><p><strong>hop_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a>) – hop size (stride) of overlap and add processing.
+Default to <cite>chunk_size // 2</cite> (50% overlap).</p></li>
+<li><p><strong>n_repeats</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of repeats. Defaults to 6.</p></li>
+<li><p><strong>norm_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – <p>Type of normalization to use. To choose from</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">'gLN'</span></code>: global Layernorm</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'cLN'</span></code>: channelwise Layernorm</p></li>
+</ul>
+</p></li>
+<li><p><strong>mask_act</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Which non-linear function to generate mask.</p></li>
+<li><p><strong>bidirectional</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – True for bidirectional Inter-Chunk RNN
+(Intra-Chunk is always bidirectional).</p></li>
+<li><p><strong>rnn_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Type of RNN used. Choose between <code class="docutils literal notranslate"><span class="pre">'RNN'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'LSTM'</span></code> and <code class="docutils literal notranslate"><span class="pre">'GRU'</span></code>.</p></li>
+<li><p><strong>num_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of layers in each RNN.</p></li>
+<li><p><strong>dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Dropout ratio, must be in [0,1].</p></li>
+<li><p><strong>in_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of input channels, should be equal to
+n_filters.</p></li>
+<li><p><strong>fb_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>className</em>) – Filterbank family from which to make encoder
+and decoder. To choose among [<code class="docutils literal notranslate"><span class="pre">'free'</span></code>, <code class="docutils literal notranslate"><span class="pre">'analytic_free'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'param_sinc'</span></code>, <code class="docutils literal notranslate"><span class="pre">'stft'</span></code>].</p></li>
+<li><p><strong>n_filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of filters / Input dimension of the masker net.</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Length of the filters.</p></li>
+<li><p><strong>stride</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Stride of the convolution.
+If None (default), set to <code class="docutils literal notranslate"><span class="pre">kernel_size</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>**fb_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Additional kwards to pass to the filterbank
+creation.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="simple">
+<dt>[1]: Jingjing Chen et al. “Dual-Path Transformer Network: Direct</dt><dd><p>Context-Aware Modeling for End-to-End Monaural Speech Separation”
+Interspeech 2020.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="asteroid.LSTMTasNet">
+<em class="property">class </em><code class="sig-prename descclassname">asteroid.</code><code class="sig-name descname">LSTMTasNet</code><span class="sig-paren">(</span><em class="sig-param">n_src</em>, <em class="sig-param">out_chan=None</em>, <em class="sig-param">rnn_type='lstm'</em>, <em class="sig-param">n_layers=4</em>, <em class="sig-param">hid_size=512</em>, <em class="sig-param">dropout=0.3</em>, <em class="sig-param">mask_act='sigmoid'</em>, <em class="sig-param">bidirectional=True</em>, <em class="sig-param">in_chan=None</em>, <em class="sig-param">fb_name='free'</em>, <em class="sig-param">n_filters=64</em>, <em class="sig-param">kernel_size=16</em>, <em class="sig-param">stride=8</em>, <em class="sig-param">encoder_activation=None</em>, <em class="sig-param">**fb_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/asteroid/models/lstm_tasnet.html#LSTMTasNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asteroid.LSTMTasNet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../package_reference/models.html#asteroid.models.base_models.BaseTasNet" title="asteroid.models.base_models.BaseTasNet"><code class="xref py py-class docutils literal notranslate"><span class="pre">asteroid.models.base_models.BaseTasNet</span></code></a></p>
+<p>TasNet separation model, as described in [1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_src</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of masks to estimate.</p></li>
+<li><p><strong>out_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a>) – Number of bins in the estimated masks.
+Defaults to <cite>in_chan</cite>.</p></li>
+<li><p><strong>hid_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of neurons in the RNNs cell state.
+Defaults to 128.</p></li>
+<li><p><strong>mask_act</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Which non-linear function to generate mask.</p></li>
+<li><p><strong>bidirectional</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – True for bidirectional Inter-Chunk RNN
+(Intra-Chunk is always bidirectional).</p></li>
+<li><p><strong>rnn_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Type of RNN used. Choose between <code class="docutils literal notranslate"><span class="pre">'RNN'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'LSTM'</span></code> and <code class="docutils literal notranslate"><span class="pre">'GRU'</span></code>.</p></li>
+<li><p><strong>n_layers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of layers in each RNN.</p></li>
+<li><p><strong>dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Dropout ratio, must be in [0,1].</p></li>
+<li><p><strong>in_chan</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Number of input channels, should be equal to
+n_filters.</p></li>
+<li><p><strong>fb_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>className</em>) – Filterbank family from which to make encoder
+and decoder. To choose among [<code class="docutils literal notranslate"><span class="pre">'free'</span></code>, <code class="docutils literal notranslate"><span class="pre">'analytic_free'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'param_sinc'</span></code>, <code class="docutils literal notranslate"><span class="pre">'stft'</span></code>].</p></li>
+<li><p><strong>n_filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of filters / Input dimension of the masker net.</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Length of the filters.</p></li>
+<li><p><strong>stride</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – Stride of the convolution.
+If None (default), set to <code class="docutils literal notranslate"><span class="pre">kernel_size</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></li>
+<li><p><strong>**fb_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Additional kwards to pass to the filterbank
+creation.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="simple">
+<dt>[1]: Yi Luo et al. “Real-time Single-channel Dereverberation and Separation</dt><dd><p>with Time-domain Audio Separation Network”, Interspeech 2018</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="asteroid.DeMask">
+<em class="property">class </em><code class="sig-prename descclassname">asteroid.</code><code class="sig-name descname">DeMask</code><span class="sig-paren">(</span><em class="sig-param">input_type='mag', output_type='mag', hidden_dims=[1024], dropout=0, activation='relu', mask_act='relu', norm_type='gLN', fb_type='stft', n_filters=512, stride=256, kernel_size=512, **fb_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/asteroid/models/demask.html#DeMask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asteroid.DeMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../package_reference/models.html#asteroid.models.base_models.BaseModel" title="asteroid.models.base_models.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">asteroid.models.base_models.BaseModel</span></code></a></p>
+<p>Simple MLP model for surgical mask speech enhancement A transformed-domain masking approach is used.
+:param input_type: whether the magnitude spectrogram “mag” or both real imaginary parts “reim” are</p>
+<blockquote>
+<div><p>passed as features to the masker network.
+Concatenation of “mag” and “reim” also can be used by using “cat”.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – whether the masker ouputs a mask
+for magnitude spectrogram “mag” or both real imaginary parts “reim”.</p></li>
+<li><p><strong>hidden_dims</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>, </em><em>optional</em>) – list of MLP hidden layer sizes.</p></li>
+<li><p><strong>dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – dropout probability.</p></li>
+<li><p><strong>activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – type of activation used in hidden MLP layers.</p></li>
+<li><p><strong>mask_act</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – Which non-linear function to generate mask.</p></li>
+<li><p><strong>norm_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) – To choose from <code class="docutils literal notranslate"><span class="pre">'BN'</span></code>, <code class="docutils literal notranslate"><span class="pre">'gLN'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'cLN'</span></code>.</p></li>
+<li><p><strong>fb_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – type of analysis and synthesis filterbanks used,
+choose between [“stft”, “free”, “analytic_free”].</p></li>
+<li><p><strong>n_filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of filters in the analysis and synthesis filterbanks.</p></li>
+<li><p><strong>stride</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – filterbank filters stride.</p></li>
+<li><p><strong>kernel_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – length of filters in the filterbank.</p></li>
+<li><p><strong>encoder_activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – </p></li>
+<li><p><strong>**fb_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Additional kwards to pass to the filterbank
+creation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="asteroid.DeMask.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">wav</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/asteroid/models/demask.html#DeMask.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asteroid.DeMask.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="asteroid.DeMask.get_model_args">
+<code class="sig-name descname">get_model_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/asteroid/models/demask.html#DeMask.get_model_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asteroid.DeMask.get_model_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Arguments needed to re-instantiate the model.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="asteroid.show_available_models">
+<code class="sig-prename descclassname">asteroid.</code><code class="sig-name descname">show_available_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/asteroid.html#show_available_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asteroid.show_available_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.data.html">asteroid.data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asteroid.data.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.avspeech_dataset.html">asteroid.data.avspeech_dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.dns_dataset.html">asteroid.data.dns_dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.fuss_dataset.html">asteroid.data.fuss_dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.kinect_wsj.html">asteroid.data.kinect_wsj module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.librimix_dataset.html">asteroid.data.librimix_dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.musdb18_dataset.html">asteroid.data.musdb18_dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.sms_wsj_dataset.html">asteroid.data.sms_wsj_dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.utils.html">asteroid.data.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.wham_dataset.html">asteroid.data.wham_dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.whamr_dataset.html">asteroid.data.whamr_dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.data.wsj0_mix.html">asteroid.data.wsj0_mix module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.dsp.html">asteroid.dsp package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asteroid.dsp.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.dsp.consistency.html">asteroid.dsp.consistency module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.dsp.overlap_add.html">asteroid.dsp.overlap_add module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.engine.html">asteroid.engine package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asteroid.engine.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.engine.optimizers.html">asteroid.engine.optimizers module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.engine.schedulers.html">asteroid.engine.schedulers module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.engine.system.html">asteroid.engine.system module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.filterbanks.html">asteroid.filterbanks package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asteroid.filterbanks.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.filterbanks.analytic_free_fb.html">asteroid.filterbanks.analytic_free_fb module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.filterbanks.enc_dec.html">asteroid.filterbanks.enc_dec module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.filterbanks.free_fb.html">asteroid.filterbanks.free_fb module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.filterbanks.griffin_lim.html">asteroid.filterbanks.griffin_lim module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.filterbanks.multiphase_gammatone_fb.html">asteroid.filterbanks.multiphase_gammatone_fb module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.filterbanks.param_sinc_fb.html">asteroid.filterbanks.param_sinc_fb module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.filterbanks.stft_fb.html">asteroid.filterbanks.stft_fb module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.filterbanks.transforms.html">asteroid.filterbanks.transforms module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.losses.html">asteroid.losses package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asteroid.losses.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.losses.cluster.html">asteroid.losses.cluster module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.losses.mse.html">asteroid.losses.mse module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.losses.multi_scale_spectral.html">asteroid.losses.multi_scale_spectral module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.losses.pit_wrapper.html">asteroid.losses.pit_wrapper module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.losses.pmsqe.html">asteroid.losses.pmsqe module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.losses.sdr.html">asteroid.losses.sdr module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.losses.stoi.html">asteroid.losses.stoi module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.masknn.html">asteroid.masknn package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asteroid.masknn.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.masknn._local.html">asteroid.masknn._local module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.masknn.activations.html">asteroid.masknn.activations module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.masknn.attention.html">asteroid.masknn.attention module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.masknn.blocks.html">asteroid.masknn.blocks module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.masknn.convolutional.html">asteroid.masknn.convolutional module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.masknn.norms.html">asteroid.masknn.norms module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.masknn.recurrent.html">asteroid.masknn.recurrent module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.models.html">asteroid.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asteroid.models.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.models.base_models.html">asteroid.models.base_models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.models.conv_tasnet.html">asteroid.models.conv_tasnet module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.models.demask.html">asteroid.models.demask module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.models.dprnn_tasnet.html">asteroid.models.dprnn_tasnet module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.models.dptnet.html">asteroid.models.dptnet module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.models.lstm_tasnet.html">asteroid.models.lstm_tasnet module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.models.publisher.html">asteroid.models.publisher module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.models.sudormrf.html">asteroid.models.sudormrf module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.models.zenodo.html">asteroid.models.zenodo module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.scripts.html">asteroid.scripts package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asteroid.scripts.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.scripts.asteroid_cli.html">asteroid.scripts.asteroid_cli module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.utils.html">asteroid.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asteroid.utils.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.utils.deprecation_utils.html">asteroid.utils.deprecation_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.utils.generic_utils.html">asteroid.utils.generic_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.utils.hub_utils.html">asteroid.utils.hub_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.utils.parser_utils.html">asteroid.utils.parser_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.utils.test_utils.html">asteroid.utils.test_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="asteroid.utils.torch_utils.html">asteroid.utils.torch_utils module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="asteroid.metrics.html">asteroid.metrics module</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Oncoming.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">asteroid package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
+         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+     
+
+  
+
+  <script type="text/javascript" src="../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <!--
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for PyTorch</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <a class="with-right-arrow" href="">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Resources</a>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="https://mpariente.github.io/asteroid/" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+
+        <div class="footer-logo-col">
+          <img class="footer-logo-img" src="../_static/images/dark_asteroid_logo.svg"/>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Asteroid</a></li>
+            <li><a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Features</a></li>
+            <li><a href="">Ecosystem</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Blog</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Support</a></li>
+            <li><a href="">Tutorials</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Docs</a></li>
+            <li><a href="https://discuss.pytorch.org" target="_blank">Discuss</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/issues" target="_blank">Github Issues</a></li>
+            <li><a href="" target="_blank">Slack</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/blob/master/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col follow-us-col">
+          <ul>
+            <li class="list-title">Follow Us</li>
+            <li>
+              <div id="mc_embed_signup">
+                <form
+                  action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="email-subscribe-form validate"
+                  target="_blank"
+                  novalidate>
+                  <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
+                    <div class="mc-field-group">
+                      <label for="mce-EMAIL" style="display:none;">Email Address</label>
+                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
+                    </div>
+
+                    <div id="mce-responses" class="clear">
+                      <div class="response" id="mce-error-response" style="display:none"></div>
+                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
+
+                    <div class="clear">
+                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button email-subscribe-button">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </li>
+          </ul>
+
+          <div class="footer-social-icons">
+            <a href="" target="_blank" class="facebook"></a>
+            <a href="https://twitter.com/" target="_blank" class="twitter"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer> -->
+
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch Lightning"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Features</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Resources</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

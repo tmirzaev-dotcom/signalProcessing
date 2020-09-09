@@ -1,0 +1,881 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>asteroid.models.publisher &mdash; asteroid 0.4.0alpha documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://github.com/mpariente/asteroid_modules/asteroid/models/publisher.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" /> -->
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch">
+       <!-- <img class="call-to-action-img" src="../../../_static/images/asteroid_logo_dark.png"/> -->
+      </a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <div class="resources-dropdown">
+              <a id="resourcesDropdownButton" data-toggle="resources-dropdown">
+                Resources
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/"">
+                  <span class=dropdown-title>Developer Resources</span>
+                  <p>Find resources and get questions answered</p>
+                </a>
+                <!--
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/">
+                  <span class=dropdown-title>About</span>
+                  <p>Learn about PyTorch’s features and capabilities</p>
+                </a>
+                -->
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.4.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Start here</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../why_use_asteroid.html">What is Asteroid?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Asteroid</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/egs_README.html">What is a recipe?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_datasets.html">Datasets and tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training_and_evaluation.html">Training and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/pretrained_models.html">Pretrained models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notebooks and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">NB: Getting stated with Asteroid</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/02_Filterbank.ipynb">NB: Understanding the Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/03_PITLossWrapper.ipynb">NB: Our PITLossWrapper explained</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/04_ProcessLargeAudioFiles.ipynb">NB: Processing large wav files</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://colab.research.google.com/drive/1BDNQZBJCDcwQhSguf3XBE7ff2KXhWu_j">Community NB: Numpy vs. Asteroid STFT</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/data.html">PyTorch Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/filterbanks.html">Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/blocks.html">DNN building blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/losses.html">Losses &amp; Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/system.html">Lightning Wrapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/optimizers.html">Optimizers &amp; Schedulers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/dsp.html">DSP Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/cli.html">CLI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution_guide.html">Asteroid High-Level Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/CONTRIBUTING.html">How to contribute</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../../../index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="../../index.html">Module code</a> &gt;</li>
+        
+          <li><a href="../../asteroid.html">asteroid</a> &gt;</li>
+        
+      <li>asteroid.models.publisher</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <h1>Source code for asteroid.models.publisher</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">.zenodo</span> <span class="kn">import</span> <span class="n">Zenodo</span>
+
+<span class="n">PLEASE_PUBLISH</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Don&#39;t forget to share your pretrained models at &quot;</span>
+    <span class="s2">&quot;https://zenodo.org/communities/asteroid-models/! =)</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;You can directly use our CLI for that, run this: </span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s1">&#39;`asteroid-upload </span><span class="si">{}</span><span class="s1"> --uploader &quot;Your name here&quot;`</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+
+<span class="n">HREF</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{}</span><span class="s1">&quot;&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;&#39;</span>
+<span class="n">CC_SA</span> <span class="o">=</span> <span class="s2">&quot;Attribution-ShareAlike 3.0 Unported&quot;</span>
+<span class="n">CC_SA_LINK</span> <span class="o">=</span> <span class="s2">&quot;https://creativecommons.org/licenses/by-sa/3.0/&quot;</span>
+<span class="n">ASTEROID_REF</span> <span class="o">=</span> <span class="n">HREF</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;https://github.com/mpariente/asteroid&quot;</span><span class="p">,</span> <span class="s2">&quot;Asteroid&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="save_publishable"><a class="viewcode-back" href="../../../package_reference/models.html#asteroid.models.save_publishable">[docs]</a><span class="k">def</span> <span class="nf">save_publishable</span><span class="p">(</span><span class="n">publish_dir</span><span class="p">,</span> <span class="n">model_dict</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">train_conf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">recipe</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Save models to prepare for publication / model sharing.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        publish_dir (str): Path to the publishing directory.</span>
+<span class="sd">            Usually under exp/exp_name/publish_dir</span>
+<span class="sd">        model_dict (dict): dict at least with keys `model_args`,</span>
+<span class="sd">            `state_dict`,`dataset` or `licenses`</span>
+<span class="sd">        metrics (dict): dict with evaluation metrics.</span>
+<span class="sd">        train_conf (dict): Training configuration dict (from conf.yml).</span>
+<span class="sd">        recipe (str): Name of the recipe.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict, same as `model_dict` with added fields.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError when either `model_args`, `state_dict`,`dataset` or</span>
+<span class="sd">            `licenses` are not present is `model_dict.keys()`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;model_args&quot;</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;`model_args` not found in model dict.&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;state_dict&quot;</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;`state_dict` not found in model dict.&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;dataset&quot;</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;`dataset` not found in model dict.&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;licenses&quot;</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s2">&quot;`licenses` not found in model dict.&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metrics</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;Cannot upload a model without metrics.&quot;</span>
+    <span class="c1"># Additional infos.</span>
+    <span class="k">if</span> <span class="n">recipe</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">recipe</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="s2">&quot;`recipe` should be a string.&quot;</span>
+        <span class="n">recipe_name</span> <span class="o">=</span> <span class="n">recipe</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">publish_dir</span><span class="p">,</span> <span class="s2">&quot;recipe_name.txt&quot;</span><span class="p">)):</span>
+            <span class="n">recipe_name</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">publish_dir</span><span class="p">,</span> <span class="s2">&quot;recipe_name.txt&quot;</span><span class="p">)))</span>
+            <span class="n">recipe_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>  <span class="c1"># remove next line</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">recipe_name</span> <span class="o">=</span> <span class="s2">&quot;Unknown&quot;</span>
+    <span class="n">model_dict</span><span class="p">[</span><span class="s2">&quot;infos&quot;</span><span class="p">][</span><span class="s2">&quot;recipe_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">recipe_name</span>
+    <span class="n">model_dict</span><span class="p">[</span><span class="s2">&quot;infos&quot;</span><span class="p">][</span><span class="s2">&quot;training_config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_conf</span>
+    <span class="n">model_dict</span><span class="p">[</span><span class="s2">&quot;infos&quot;</span><span class="p">][</span><span class="s2">&quot;final_metrics&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metrics</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">publish_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_dict</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">publish_dir</span><span class="p">,</span> <span class="s2">&quot;model.pth&quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">PLEASE_PUBLISH</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">publish_dir</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">model_dict</span></div>
+
+
+<div class="viewcode-block" id="upload_publishable"><a class="viewcode-back" href="../../../package_reference/models.html#asteroid.models.upload_publishable">[docs]</a><span class="k">def</span> <span class="nf">upload_publishable</span><span class="p">(</span>
+    <span class="n">publish_dir</span><span class="p">,</span>
+    <span class="n">uploader</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">affiliation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">git_username</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">force_publish</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">use_sandbox</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">unit_test</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Entry point to upload publishable model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        publish_dir (str): Path to the publishing directory.</span>
+<span class="sd">            Usually under exp/exp_name/publish_dir</span>
+<span class="sd">        uploader (str): Full name of the uploader (Ex: Manuel Pariente)</span>
+<span class="sd">        affiliation (str, optional): Affiliation (no accent).</span>
+<span class="sd">        git_username (str, optional): GitHub username.</span>
+<span class="sd">        token (str): Access token generated to upload depositions.</span>
+<span class="sd">        force_publish (bool): Whether to directly publish without</span>
+<span class="sd">            asking confirmation before. Defaults to False.</span>
+<span class="sd">        use_sandbox (bool): Whether to use Zenodo&#39;s sandbox instead of</span>
+<span class="sd">            the official Zenodo.</span>
+<span class="sd">        unit_test (bool): If True, we do not ask user input and do not publish.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">get_answer</span><span class="p">():</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Do you want to publish it now (irreversible)? y/n&quot;</span> <span class="s2">&quot;(Recommended: n).</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">out</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;n&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Expected one of [`y`, `n`], received </span><span class="si">{</span><span class="n">out</span><span class="si">}</span><span class="s2">, please retry.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">get_answer</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">if</span> <span class="n">uploader</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Need uploader name&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Make publishable model and save it</span>
+    <span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">publish_dir</span><span class="p">,</span> <span class="s2">&quot;model.pth&quot;</span><span class="p">)</span>
+    <span class="n">publish_model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">publish_dir</span><span class="p">,</span> <span class="s2">&quot;published_model.pth&quot;</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">_populate_publishable</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">uploader</span><span class="o">=</span><span class="n">uploader</span><span class="p">,</span> <span class="n">affiliation</span><span class="o">=</span><span class="n">affiliation</span><span class="p">,</span> <span class="n">git_username</span><span class="o">=</span><span class="n">git_username</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">publish_model_path</span><span class="p">)</span>
+
+    <span class="c1"># Get Zenodo access token</span>
+    <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;ACCESS_TOKEN&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Need an access token to Zenodo to upload the model. Either &quot;</span>
+                <span class="s2">&quot;set ACCESS_TOKEN environment variable or pass it directly &quot;</span>
+                <span class="s2">&quot;(`asteroid-upload --token ...`).&quot;</span>
+                <span class="s2">&quot;If you do not have a access token, first create a Zenodo &quot;</span>
+                <span class="s2">&quot;account (https://zenodo.org/signup/), create a token &quot;</span>
+                <span class="s2">&quot;https://zenodo.org/account/settings/applications/tokens/new/&quot;</span>
+                <span class="s2">&quot;and you are all set to help us! =)&quot;</span>
+            <span class="p">)</span>
+
+    <span class="c1"># Do the actual upload</span>
+    <span class="n">zen</span><span class="p">,</span> <span class="n">dep_id</span> <span class="o">=</span> <span class="n">zenodo_upload</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="n">publish_model_path</span><span class="p">,</span> <span class="n">use_sandbox</span><span class="o">=</span><span class="n">use_sandbox</span>
+    <span class="p">)</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">zen</span><span class="o">.</span><span class="n">zenodo_address</span><span class="p">,</span> <span class="s2">&quot;deposit&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dep_id</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">force_publish</span><span class="p">:</span>
+        <span class="n">r_publish</span> <span class="o">=</span> <span class="n">zen</span><span class="o">.</span><span class="n">publish_deposition</span><span class="p">(</span><span class="n">dep_id</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">r_publish</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can also visit it at </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">address</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">r_publish</span>
+    <span class="c1"># Give choice</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">zen</span><span class="o">.</span><span class="n">get_deposition</span><span class="p">(</span><span class="n">dep_id</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2"> This is the current state of the deposition &quot;</span> <span class="sa">f</span><span class="s2">&quot;(see here </span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2">): &quot;</span><span class="p">)</span>
+    <span class="n">pprint</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="c1"># Patch to run unit test</span>
+    <span class="k">if</span> <span class="n">unit_test</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">zen</span><span class="p">,</span> <span class="n">current</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">get_answer</span><span class="p">()</span>
+    <span class="c1"># Get user input</span>
+    <span class="k">if</span> <span class="n">inp</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">zen</span><span class="o">.</span><span class="n">publish_deposition</span><span class="p">(</span><span class="n">dep_id</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Visit it at </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">address</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Did not finalize the upload, please visit </span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2"> to finalize &quot;</span> <span class="sa">f</span><span class="s2">&quot;it.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_populate_publishable"><a class="viewcode-back" href="../../../apidoc/asteroid.models.publisher.html#asteroid.models._populate_publishable">[docs]</a><span class="k">def</span> <span class="nf">_populate_publishable</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">uploader</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">affiliation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">git_username</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Populate infos in publishable model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (dict): Model to publish, with `infos` key, at least.</span>
+<span class="sd">        uploader (str): Full name of the uploader (Ex: Manuel Pariente)</span>
+<span class="sd">        affiliation (str, optional): Affiliation (no accent).</span>
+<span class="sd">        git_username (str, optional): GitHub username.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict (model), same as input `model`</span>
+
+<span class="sd">    .. note:: If a `git_username` is not specified, we look for it somehow, or take</span>
+<span class="sd">        the laptop username.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get username somehow</span>
+    <span class="k">if</span> <span class="n">git_username</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">git_username</span> <span class="o">=</span> <span class="n">get_username</span><span class="p">()</span>
+
+    <span class="c1"># Example: mpariente/ConvTasNet_WHAM_sepclean</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;model_name&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;task&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)])</span>
+    <span class="n">upload_name</span> <span class="o">=</span> <span class="n">git_username</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">model_name</span>
+    <span class="c1"># Write License Notice</span>
+    <span class="n">license_note</span> <span class="o">=</span> <span class="n">make_license_notice</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;licenses&quot;</span><span class="p">],</span> <span class="n">uploader</span><span class="o">=</span><span class="n">uploader</span><span class="p">)</span>
+    <span class="c1"># Add infos</span>
+    <span class="n">model</span><span class="p">[</span><span class="s2">&quot;infos&quot;</span><span class="p">][</span><span class="s2">&quot;uploader&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uploader</span>
+    <span class="n">model</span><span class="p">[</span><span class="s2">&quot;infos&quot;</span><span class="p">][</span><span class="s2">&quot;git_username&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">git_username</span>
+    <span class="n">model</span><span class="p">[</span><span class="s2">&quot;infos&quot;</span><span class="p">][</span><span class="s2">&quot;affiliation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">affiliation</span> <span class="k">if</span> <span class="n">affiliation</span> <span class="k">else</span> <span class="s2">&quot;Unknown&quot;</span>
+    <span class="n">model</span><span class="p">[</span><span class="s2">&quot;infos&quot;</span><span class="p">][</span><span class="s2">&quot;upload_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">upload_name</span>
+    <span class="n">model</span><span class="p">[</span><span class="s2">&quot;infos&quot;</span><span class="p">][</span><span class="s2">&quot;license_note&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">license_note</span>
+    <span class="k">return</span> <span class="n">model</span></div>
+
+
+<div class="viewcode-block" id="get_username"><a class="viewcode-back" href="../../../package_reference/models.html#asteroid.models.get_username">[docs]</a><span class="k">def</span> <span class="nf">get_username</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Get git of FS username for upload. &quot;&quot;&quot;</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s2">&quot;git&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;user.name&quot;</span><span class="p">])</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>  <span class="c1"># Empty string</span>
+        <span class="kn">import</span> <span class="nn">getpass</span>
+
+        <span class="n">username</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">username</span></div>
+
+
+<div class="viewcode-block" id="make_license_notice"><a class="viewcode-back" href="../../../package_reference/models.html#asteroid.models.make_license_notice">[docs]</a><span class="k">def</span> <span class="nf">make_license_notice</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">licenses</span><span class="p">,</span> <span class="n">uploader</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Make license notice based on license dicts.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model_name (str): Name of the model.</span>
+<span class="sd">        licenses (List[dict]): List of dict with</span>
+<span class="sd">            keys (`title`, `title_link`, `author`, `author_link`,</span>
+<span class="sd">                  `licence`, `licence_link`).</span>
+<span class="sd">        uploader (str): Name of the uploader such as &quot;Manuel Pariente&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str, the license note describing the model, it&#39;s attribution,</span>
+<span class="sd">            the original licenses, what we license it under and the licensor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">uploader</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot share model without uploader.&quot;</span><span class="p">)</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="s1">&#39;This work &quot;</span><span class="si">{}</span><span class="s1">&quot; is a derivative &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">l_dict</span> <span class="ow">in</span> <span class="n">licenses</span><span class="p">:</span>
+        <span class="c1"># Clickable links in HTML.</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">HREF</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l_dict</span><span class="p">[</span><span class="s2">&quot;title_link&quot;</span><span class="p">],</span> <span class="n">l_dict</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">])</span>
+        <span class="n">author</span> <span class="o">=</span> <span class="n">HREF</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l_dict</span><span class="p">[</span><span class="s2">&quot;author_link&quot;</span><span class="p">],</span> <span class="n">l_dict</span><span class="p">[</span><span class="s2">&quot;author&quot;</span><span class="p">])</span>
+        <span class="n">license_h</span> <span class="o">=</span> <span class="n">HREF</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l_dict</span><span class="p">[</span><span class="s2">&quot;license_link&quot;</span><span class="p">],</span> <span class="n">l_dict</span><span class="p">[</span><span class="s2">&quot;license&quot;</span><span class="p">])</span>
+        <span class="n">comm</span> <span class="o">=</span> <span class="s2">&quot; (Research only)&quot;</span> <span class="k">if</span> <span class="n">l_dict</span><span class="p">[</span><span class="s2">&quot;non_commercial&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">note</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;of </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> by </span><span class="si">{</span><span class="n">author</span><span class="si">}</span><span class="s2">, used under </span><span class="si">{</span><span class="n">license_h</span><span class="si">}{</span><span class="n">comm</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">note</span> <span class="o">+=</span> <span class="s2">&quot;; &quot;</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;. &quot;</span>  <span class="c1"># Remove the last ;</span>
+    <span class="n">cc_sa</span> <span class="o">=</span> <span class="n">HREF</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">CC_SA_LINK</span><span class="p">,</span> <span class="n">CC_SA</span><span class="p">)</span>
+    <span class="n">note</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s1">&quot; is licensed under </span><span class="si">{</span><span class="n">cc_sa</span><span class="si">}</span><span class="s1"> by </span><span class="si">{</span><span class="n">uploader</span><span class="si">}</span><span class="s1">.&#39;</span>
+    <span class="k">return</span> <span class="n">note</span></div>
+
+
+<div class="viewcode-block" id="zenodo_upload"><a class="viewcode-back" href="../../../package_reference/models.html#asteroid.models.zenodo_upload">[docs]</a><span class="k">def</span> <span class="nf">zenodo_upload</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_sandbox</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Create deposit and upload metadata + model</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (dict):</span>
+<span class="sd">        token (str): Access token.</span>
+<span class="sd">        model_path (str): Saved model path.</span>
+<span class="sd">        use_sandbox (bool): Whether to use Zenodo&#39;s sandbox instead of</span>
+<span class="sd">            the official Zenodo.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Zenodo (Zenodo instance with access token)</span>
+<span class="sd">        int (deposit ID)</span>
+
+<span class="sd">    .. note::If `model_path` is not specified, save the model in tmp.pth and</span>
+<span class="sd">        remove it after upload.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model_path_was_none</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">model_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">model_path_was_none</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">model_path</span> <span class="o">=</span> <span class="s2">&quot;tmp.pth&quot;</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">model_path</span><span class="p">)</span>
+        <span class="c1"># raise ValueError(&quot;Need path&quot;)</span>
+
+    <span class="n">zen</span> <span class="o">=</span> <span class="n">Zenodo</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">use_sandbox</span><span class="o">=</span><span class="n">use_sandbox</span><span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">make_metadata_from_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">zen</span><span class="o">.</span><span class="n">create_new_deposition</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Could not create the deposition, check the &quot;</span> <span class="s2">&quot;provided token.&quot;</span><span class="p">)</span>
+    <span class="n">dep_id</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">zen</span><span class="o">.</span><span class="n">upload_new_file_to_deposition</span><span class="p">(</span><span class="n">dep_id</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;model.pth&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">model_path_was_none</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">zen</span><span class="p">,</span> <span class="n">dep_id</span></div>
+
+
+<div class="viewcode-block" id="make_metadata_from_model"><a class="viewcode-back" href="../../../package_reference/models.html#asteroid.models.make_metadata_from_model">[docs]</a><span class="k">def</span> <span class="nf">make_metadata_from_model</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Create Zenodo deposit metadata for a given publishable model.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        model (dict): Dictionary with all infos needed to publish.</span>
+<span class="sd">            More info to come.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict, the metadata to create the Zenodo deposit with.</span>
+
+<span class="sd">    .. note::We remove the PESQ from the final results as a license is needed to</span>
+<span class="sd">        use it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">infos</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;infos&quot;</span><span class="p">]</span>
+    <span class="c1"># Description section</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;&lt;strong&gt;Description: &lt;/strong&gt;&lt;/p&gt;&quot;</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="s2">&quot;This model was trained by </span><span class="si">{}</span><span class="s2"> using the </span><span class="si">{}</span><span class="s2"> recipe in </span><span class="si">{}</span><span class="s2">. &quot;</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">infos</span><span class="p">[</span><span class="s2">&quot;uploader&quot;</span><span class="p">],</span> <span class="n">infos</span><span class="p">[</span><span class="s2">&quot;recipe_name&quot;</span><span class="p">],</span> <span class="n">ASTEROID_REF</span><span class="p">)</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="s2">&quot;&lt;/a&gt;It was trained on the &lt;code&gt;</span><span class="si">{}</span><span class="s2">&lt;/code&gt; task of the </span><span class="si">{}</span><span class="s2"> dataset.&lt;/p&gt;&quot;</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;task&quot;</span><span class="p">],</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Training config section</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&quot;</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&lt;strong&gt;Training config:&lt;/strong&gt;&lt;/p&gt;&quot;</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="n">two_level_dict_html</span><span class="p">(</span><span class="n">infos</span><span class="p">[</span><span class="s2">&quot;training_config&quot;</span><span class="p">])</span>
+
+    <span class="c1"># Results section</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&quot;</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&lt;strong&gt;Results:&lt;/strong&gt;&lt;/p&gt;&quot;</span>
+    <span class="n">display_result</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">infos</span><span class="p">[</span><span class="s2">&quot;final_metrics&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;pesq&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()}</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="n">display_one_level_dict</span><span class="p">(</span><span class="n">display_result</span><span class="p">)</span>
+
+    <span class="c1"># License section</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&quot;</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&lt;strong&gt;License notice:&lt;/strong&gt;&lt;/p&gt;&quot;</span>
+    <span class="n">description</span> <span class="o">+=</span> <span class="n">infos</span><span class="p">[</span><span class="s2">&quot;license_note&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Putting it together.</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">infos</span><span class="p">[</span><span class="s2">&quot;upload_name&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;upload_type&quot;</span><span class="p">:</span> <span class="s2">&quot;software&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+        <span class="s2">&quot;creators&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">infos</span><span class="p">[</span><span class="s2">&quot;uploader&quot;</span><span class="p">],</span> <span class="s2">&quot;affiliation&quot;</span><span class="p">:</span> <span class="n">infos</span><span class="p">[</span><span class="s2">&quot;affiliation&quot;</span><span class="p">]}],</span>
+        <span class="s2">&quot;communities&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;zenodo&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;asteroid-models&quot;</span><span class="p">}],</span>
+        <span class="s2">&quot;keywords&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Asteroid&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;audio source separation&quot;</span><span class="p">,</span>
+            <span class="n">model</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">],</span>
+            <span class="n">model</span><span class="p">[</span><span class="s2">&quot;task&quot;</span><span class="p">],</span>
+            <span class="n">model</span><span class="p">[</span><span class="s2">&quot;model_name&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;pretrained model&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;CC-BY-SA-3.0&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">metadata</span></div>
+
+
+<div class="viewcode-block" id="two_level_dict_html"><a class="viewcode-back" href="../../../package_reference/models.html#asteroid.models.two_level_dict_html">[docs]</a><span class="k">def</span> <span class="nf">two_level_dict_html</span><span class="p">(</span><span class="n">dic</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Two-level dict to HTML.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dic (dict): two-level dict</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str for HTML-encoded two level dic</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&lt;ul&gt;&quot;</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="c1"># Open field</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: &lt;ul&gt;&quot;</span>
+        <span class="k">for</span> <span class="n">k2</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">k2</span><span class="p">])</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{</span><span class="n">k2</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">&lt;/li&gt;&quot;</span>
+        <span class="c1"># Close field</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s2">&quot;&lt;/il&gt;&lt;/ul&gt;&quot;</span>
+    <span class="n">html</span> <span class="o">+=</span> <span class="s2">&quot;&lt;/ul&gt;&quot;</span>
+    <span class="k">return</span> <span class="n">html</span></div>
+
+
+<div class="viewcode-block" id="display_one_level_dict"><a class="viewcode-back" href="../../../package_reference/models.html#asteroid.models.display_one_level_dict">[docs]</a><span class="k">def</span> <span class="nf">display_one_level_dict</span><span class="p">(</span><span class="n">dic</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Single level dict to HTML</span>
+<span class="sd">    Args:</span>
+<span class="sd">        dic (dict):</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str for HTML-encoded single level dic</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&lt;ul&gt;&quot;</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="c1"># Open field</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">dic</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2"> &lt;/li&gt;&quot;</span>
+    <span class="n">html</span> <span class="o">+=</span> <span class="s2">&quot;&lt;/ul&gt;&quot;</span>
+    <span class="k">return</span> <span class="n">html</span></div>
+</pre></div>
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Oncoming.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+         <script src="../../../_static/jquery.js"></script>
+         <script src="../../../_static/underscore.js"></script>
+         <script src="../../../_static/doctools.js"></script>
+         <script src="../../../_static/language_data.js"></script>
+         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+     
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../../../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <!--
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for PyTorch</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <a class="with-right-arrow" href="">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Resources</a>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="https://mpariente.github.io/asteroid/" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+
+        <div class="footer-logo-col">
+          <img class="footer-logo-img" src="../../../_static/images/dark_asteroid_logo.svg"/>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Asteroid</a></li>
+            <li><a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Features</a></li>
+            <li><a href="">Ecosystem</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Blog</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Support</a></li>
+            <li><a href="">Tutorials</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Docs</a></li>
+            <li><a href="https://discuss.pytorch.org" target="_blank">Discuss</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/issues" target="_blank">Github Issues</a></li>
+            <li><a href="" target="_blank">Slack</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/blob/master/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col follow-us-col">
+          <ul>
+            <li class="list-title">Follow Us</li>
+            <li>
+              <div id="mc_embed_signup">
+                <form
+                  action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="email-subscribe-form validate"
+                  target="_blank"
+                  novalidate>
+                  <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
+                    <div class="mc-field-group">
+                      <label for="mce-EMAIL" style="display:none;">Email Address</label>
+                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
+                    </div>
+
+                    <div id="mce-responses" class="clear">
+                      <div class="response" id="mce-error-response" style="display:none"></div>
+                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
+
+                    <div class="clear">
+                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button email-subscribe-button">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </li>
+          </ul>
+
+          <div class="footer-social-icons">
+            <a href="" target="_blank" class="facebook"></a>
+            <a href="https://twitter.com/" target="_blank" class="twitter"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer> -->
+
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch Lightning"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Features</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Resources</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../../../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+asteroid.scripts package
+========================
+
+.. automodule:: asteroid.scripts
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:
+
+Submodules
+----------
+
+.. toctree::
+
+   asteroid.scripts.asteroid_cli

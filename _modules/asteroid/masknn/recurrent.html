@@ -1,0 +1,1013 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>asteroid.masknn.recurrent &mdash; asteroid 0.4.0alpha documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://github.com/mpariente/asteroid_modules/asteroid/masknn/recurrent.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" /> -->
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch">
+       <!-- <img class="call-to-action-img" src="../../../_static/images/asteroid_logo_dark.png"/> -->
+      </a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <div class="resources-dropdown">
+              <a id="resourcesDropdownButton" data-toggle="resources-dropdown">
+                Resources
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/"">
+                  <span class=dropdown-title>Developer Resources</span>
+                  <p>Find resources and get questions answered</p>
+                </a>
+                <!--
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/">
+                  <span class=dropdown-title>About</span>
+                  <p>Learn about PyTorch’s features and capabilities</p>
+                </a>
+                -->
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.4.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Start here</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../why_use_asteroid.html">What is Asteroid?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Asteroid</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/egs_README.html">What is a recipe?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_datasets.html">Datasets and tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training_and_evaluation.html">Training and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/pretrained_models.html">Pretrained models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notebooks and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">NB: Getting stated with Asteroid</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/02_Filterbank.ipynb">NB: Understanding the Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/03_PITLossWrapper.ipynb">NB: Our PITLossWrapper explained</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/04_ProcessLargeAudioFiles.ipynb">NB: Processing large wav files</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://colab.research.google.com/drive/1BDNQZBJCDcwQhSguf3XBE7ff2KXhWu_j">Community NB: Numpy vs. Asteroid STFT</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/data.html">PyTorch Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/filterbanks.html">Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/blocks.html">DNN building blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/losses.html">Losses &amp; Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/system.html">Lightning Wrapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/optimizers.html">Optimizers &amp; Schedulers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/dsp.html">DSP Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/cli.html">CLI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution_guide.html">Asteroid High-Level Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/CONTRIBUTING.html">How to contribute</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../../../index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="../../index.html">Module code</a> &gt;</li>
+        
+          <li><a href="../../asteroid.html">asteroid</a> &gt;</li>
+        
+      <li>asteroid.masknn.recurrent</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <h1>Source code for asteroid.masknn.recurrent</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torch.nn.functional</span> <span class="kn">import</span> <span class="n">fold</span><span class="p">,</span> <span class="n">unfold</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">norms</span><span class="p">,</span> <span class="n">activations</span>
+<span class="kn">from</span> <span class="nn">.norms</span> <span class="kn">import</span> <span class="n">GlobLN</span><span class="p">,</span> <span class="n">CumLN</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">has_arg</span>
+
+
+<div class="viewcode-block" id="SingleRNN"><a class="viewcode-back" href="../../../package_reference/masknn.html#asteroid.masknn.SingleRNN">[docs]</a><span class="k">class</span> <span class="nc">SingleRNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Module for a RNN block.</span>
+
+<span class="sd">    Inspired from https://github.com/yluo42/TAC/blob/master/utility/models.py</span>
+<span class="sd">    Licensed under CC BY-NC-SA 3.0 US.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rnn_type (str): Select from ``&#39;RNN&#39;``, ``&#39;LSTM&#39;``, ``&#39;GRU&#39;``. Can</span>
+<span class="sd">            also be passed in lowercase letters.</span>
+<span class="sd">        input_size (int): Dimension of the input feature. The input should have</span>
+<span class="sd">            shape [batch, seq_len, input_size].</span>
+<span class="sd">        hidden_size (int): Dimension of the hidden state.</span>
+<span class="sd">        n_layers (int, optional): Number of layers used in RNN. Default is 1.</span>
+<span class="sd">        dropout (float, optional): Dropout ratio. Default is 0.</span>
+<span class="sd">        bidirectional (bool, optional): Whether the RNN layers are</span>
+<span class="sd">            bidirectional. Default is ``False``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">rnn_type</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SingleRNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">rnn_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;RNN&quot;</span><span class="p">,</span> <span class="s2">&quot;LSTM&quot;</span><span class="p">,</span> <span class="s2">&quot;GRU&quot;</span><span class="p">]</span>
+        <span class="n">rnn_type</span> <span class="o">=</span> <span class="n">rnn_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn_type</span> <span class="o">=</span> <span class="n">rnn_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">=</span> <span class="n">input_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">rnn_type</span><span class="p">)(</span>
+            <span class="n">input_size</span><span class="p">,</span>
+            <span class="n">hidden_size</span><span class="p">,</span>
+            <span class="n">num_layers</span><span class="o">=</span><span class="n">n_layers</span><span class="p">,</span>
+            <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span>
+            <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">bidirectional</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">bidirectional</span><span class="p">),</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="SingleRNN.forward"><a class="viewcode-back" href="../../../package_reference/blocks.html#asteroid.masknn.SingleRNN.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Input shape [batch, seq, feats] &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span><span class="o">.</span><span class="n">flatten_parameters</span><span class="p">()</span>  <span class="c1"># Enables faster multi-GPU training.</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">inp</span>
+        <span class="n">rnn_output</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rnn_output</span></div></div>
+
+
+<div class="viewcode-block" id="StackedResidualRNN"><a class="viewcode-back" href="../../../package_reference/blocks.html#asteroid.masknn.StackedResidualRNN">[docs]</a><span class="k">class</span> <span class="nc">StackedResidualRNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Stacked RNN with builtin residual connection.</span>
+<span class="sd">    Only supports forward RNNs.</span>
+<span class="sd">    See StackedResidualBiRNN for bidirectional ones.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rnn_type (str): Select from ``&#39;RNN&#39;``, ``&#39;LSTM&#39;``, ``&#39;GRU&#39;``. Can</span>
+<span class="sd">            also be passed in lowercase letters.</span>
+<span class="sd">        n_units (int): Number of units in recurrent layers. This will also be</span>
+<span class="sd">            the expected input size.</span>
+<span class="sd">        n_layers (int): Number of recurrent layers.</span>
+<span class="sd">        dropout (float): Dropout value, between 0. and 1. (Default: 0.)</span>
+<span class="sd">        bidirectional (bool): If True, use bidirectional RNN, else</span>
+<span class="sd">            unidirectional. (Default: False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rnn_type</span><span class="p">,</span> <span class="n">n_units</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StackedResidualRNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn_type</span> <span class="o">=</span> <span class="n">rnn_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_units</span> <span class="o">=</span> <span class="n">n_units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout</span>
+        <span class="k">assert</span> <span class="n">bidirectional</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Bidirectional not supported yet&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bidirectional</span> <span class="o">=</span> <span class="n">bidirectional</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_layers</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">SingleRNN</span><span class="p">(</span>
+                    <span class="n">rnn_type</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="n">n_units</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="n">n_units</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="n">bidirectional</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StackedResidualRNN.forward"><a class="viewcode-back" href="../../../package_reference/blocks.html#asteroid.masknn.StackedResidualRNN.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Builtin residual connections + dropout applied before residual.</span>
+<span class="sd">            Input shape : [batch, time_axis, feat_axis]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">rnn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="n">rnn_out</span> <span class="o">=</span> <span class="n">rnn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">dropped_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span><span class="p">(</span><span class="n">rnn_out</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dropped_out</span>
+        <span class="k">return</span> <span class="n">x</span></div></div>
+
+
+<div class="viewcode-block" id="StackedResidualBiRNN"><a class="viewcode-back" href="../../../package_reference/blocks.html#asteroid.masknn.StackedResidualBiRNN">[docs]</a><span class="k">class</span> <span class="nc">StackedResidualBiRNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Stacked Bidirectional RNN with builtin residual connection.</span>
+<span class="sd">    Residual connections are applied on both RNN directions.</span>
+<span class="sd">    Only supports bidiriectional RNNs.</span>
+<span class="sd">    See StackedResidualRNN for unidirectional ones.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rnn_type (str): Select from ``&#39;RNN&#39;``, ``&#39;LSTM&#39;``, ``&#39;GRU&#39;``. Can</span>
+<span class="sd">            also be passed in lowercase letters.</span>
+<span class="sd">        n_units (int): Number of units in recurrent layers. This will also be</span>
+<span class="sd">            the expected input size.</span>
+<span class="sd">        n_layers (int): Number of recurrent layers.</span>
+<span class="sd">        dropout (float): Dropout value, between 0. and 1. (Default: 0.)</span>
+<span class="sd">        bidirectional (bool): If True, use bidirectional RNN, else</span>
+<span class="sd">            unidirectional. (Default: False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rnn_type</span><span class="p">,</span> <span class="n">n_units</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn_type</span> <span class="o">=</span> <span class="n">rnn_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_units</span> <span class="o">=</span> <span class="n">n_units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout</span>
+        <span class="k">assert</span> <span class="n">bidirectional</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Only bidirectional not supported yet&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bidirectional</span> <span class="o">=</span> <span class="n">bidirectional</span>
+
+        <span class="c1"># The first layer has as many units as input size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_layer</span> <span class="o">=</span> <span class="n">SingleRNN</span><span class="p">(</span>
+            <span class="n">rnn_type</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="n">n_units</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="n">n_units</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="n">bidirectional</span>
+        <span class="p">)</span>
+        <span class="c1"># As the first layer outputs 2*n_units, the following layers need</span>
+        <span class="c1"># 2*n_units as input size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_layers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">input_size</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_units</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">SingleRNN</span><span class="p">(</span>
+                    <span class="n">rnn_type</span><span class="p">,</span>
+                    <span class="n">input_size</span><span class="o">=</span><span class="n">input_size</span><span class="p">,</span>
+                    <span class="n">hidden_size</span><span class="o">=</span><span class="n">n_units</span><span class="p">,</span>
+                    <span class="n">bidirectional</span><span class="o">=</span><span class="n">bidirectional</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">)</span>
+
+<div class="viewcode-block" id="StackedResidualBiRNN.forward"><a class="viewcode-back" href="../../../package_reference/blocks.html#asteroid.masknn.StackedResidualBiRNN.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Builtin residual connections + dropout applied before residual.</span>
+<span class="sd">            Input shape : [batch, time_axis, feat_axis]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># First layer</span>
+        <span class="n">rnn_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">dropped_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span><span class="p">(</span><span class="n">rnn_out</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">dropped_out</span>
+        <span class="c1"># Rest of the layers</span>
+        <span class="k">for</span> <span class="n">rnn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+            <span class="n">rnn_out</span> <span class="o">=</span> <span class="n">rnn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">dropped_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout_layer</span><span class="p">(</span><span class="n">rnn_out</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dropped_out</span>
+        <span class="k">return</span> <span class="n">x</span></div></div>
+
+
+<div class="viewcode-block" id="DPRNNBlock"><a class="viewcode-back" href="../../../package_reference/masknn.html#asteroid.masknn.DPRNNBlock">[docs]</a><span class="k">class</span> <span class="nc">DPRNNBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Dual-Path RNN Block as proposed in [1].</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        in_chan (int): Number of input channels.</span>
+<span class="sd">        hid_size (int): Number of hidden neurons in the RNNs.</span>
+<span class="sd">        norm_type (str, optional): Type of normalization to use. To choose from</span>
+<span class="sd">            - ``&#39;gLN&#39;``: global Layernorm</span>
+<span class="sd">            - ``&#39;cLN&#39;``: channelwise Layernorm</span>
+<span class="sd">        bidirectional (bool, optional): True for bidirectional Inter-Chunk RNN.</span>
+<span class="sd">        rnn_type (str, optional): Type of RNN used. Choose from ``&#39;RNN&#39;``,</span>
+<span class="sd">            ``&#39;LSTM&#39;`` and ``&#39;GRU&#39;``.</span>
+<span class="sd">        num_layers (int, optional): Number of layers used in each RNN.</span>
+<span class="sd">        dropout (float, optional): Dropout ratio. Must be in [0, 1].</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] &quot;Dual-path RNN: efficient long sequence modeling for</span>
+<span class="sd">        time-domain single-channel speech separation&quot;, Yi Luo, Zhuo Chen</span>
+<span class="sd">        and Takuya Yoshioka. https://arxiv.org/abs/1910.06379</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_chan</span><span class="p">,</span>
+        <span class="n">hid_size</span><span class="p">,</span>
+        <span class="n">norm_type</span><span class="o">=</span><span class="s2">&quot;gLN&quot;</span><span class="p">,</span>
+        <span class="n">bidirectional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">rnn_type</span><span class="o">=</span><span class="s2">&quot;LSTM&quot;</span><span class="p">,</span>
+        <span class="n">num_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">dropout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DPRNNBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># IntraRNN and linear projection layer (always bi-directional)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intra_RNN</span> <span class="o">=</span> <span class="n">SingleRNN</span><span class="p">(</span>
+            <span class="n">rnn_type</span><span class="p">,</span> <span class="n">in_chan</span><span class="p">,</span> <span class="n">hid_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intra_linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hid_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">in_chan</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intra_norm</span> <span class="o">=</span> <span class="n">norms</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">norm_type</span><span class="p">)(</span><span class="n">in_chan</span><span class="p">)</span>
+        <span class="c1"># InterRNN block and linear projection layer (uni or bi-directional)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inter_RNN</span> <span class="o">=</span> <span class="n">SingleRNN</span><span class="p">(</span>
+            <span class="n">rnn_type</span><span class="p">,</span> <span class="n">in_chan</span><span class="p">,</span> <span class="n">hid_size</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">bidirectional</span><span class="o">=</span><span class="n">bidirectional</span>
+        <span class="p">)</span>
+        <span class="n">num_direction</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bidirectional</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inter_linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hid_size</span> <span class="o">*</span> <span class="n">num_direction</span><span class="p">,</span> <span class="n">in_chan</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inter_norm</span> <span class="o">=</span> <span class="n">norms</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">norm_type</span><span class="p">)(</span><span class="n">in_chan</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DPRNNBlock.forward"><a class="viewcode-back" href="../../../package_reference/blocks.html#asteroid.masknn.DPRNNBlock.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Input shape : [batch, feats, chunk_size, num_chunks] &quot;&quot;&quot;</span>
+        <span class="n">B</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">x</span>  <span class="c1"># for skip connection</span>
+        <span class="c1"># Intra-chunk processing</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span> <span class="o">*</span> <span class="n">L</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intra_RNN</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intra_linear</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">intra_norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span> <span class="o">+</span> <span class="n">x</span>
+        <span class="c1"># Inter-chunk processing</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span> <span class="o">*</span> <span class="n">K</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inter_RNN</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inter_linear</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inter_norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="n">x</span></div></div>
+
+
+<div class="viewcode-block" id="DPRNN"><a class="viewcode-back" href="../../../package_reference/masknn.html#asteroid.masknn.DPRNN">[docs]</a><span class="k">class</span> <span class="nc">DPRNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Dual-path RNN Network for Single-Channel Source Separation</span>
+<span class="sd">        introduced in [1].</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        in_chan (int): Number of input filters.</span>
+<span class="sd">        n_src (int): Number of masks to estimate.</span>
+<span class="sd">        out_chan  (int or None): Number of bins in the estimated masks.</span>
+<span class="sd">            Defaults to `in_chan`.</span>
+<span class="sd">        bn_chan (int): Number of channels after the bottleneck.</span>
+<span class="sd">            Defaults to 128.</span>
+<span class="sd">        hid_size (int): Number of neurons in the RNNs cell state.</span>
+<span class="sd">            Defaults to 128.</span>
+<span class="sd">        chunk_size (int): window size of overlap and add processing.</span>
+<span class="sd">            Defaults to 100.</span>
+<span class="sd">        hop_size (int or None): hop size (stride) of overlap and add processing.</span>
+<span class="sd">            Default to `chunk_size // 2` (50% overlap).</span>
+<span class="sd">        n_repeats (int): Number of repeats. Defaults to 6.</span>
+<span class="sd">        norm_type (str, optional): Type of normalization to use. To choose from</span>
+
+<span class="sd">            - ``&#39;gLN&#39;``: global Layernorm</span>
+<span class="sd">            - ``&#39;cLN&#39;``: channelwise Layernorm</span>
+<span class="sd">        mask_act (str, optional): Which non-linear function to generate mask.</span>
+<span class="sd">        bidirectional (bool, optional): True for bidirectional Inter-Chunk RNN</span>
+<span class="sd">            (Intra-Chunk is always bidirectional).</span>
+<span class="sd">        rnn_type (str, optional): Type of RNN used. Choose between ``&#39;RNN&#39;``,</span>
+<span class="sd">            ``&#39;LSTM&#39;`` and ``&#39;GRU&#39;``.</span>
+<span class="sd">        num_layers (int, optional): Number of layers in each RNN.</span>
+<span class="sd">        dropout (float, optional): Dropout ratio, must be in [0,1].</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] &quot;Dual-path RNN: efficient long sequence modeling for</span>
+<span class="sd">            time-domain single-channel speech separation&quot;, Yi Luo, Zhuo Chen</span>
+<span class="sd">            and Takuya Yoshioka. https://arxiv.org/abs/1910.06379</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_chan</span><span class="p">,</span>
+        <span class="n">n_src</span><span class="p">,</span>
+        <span class="n">out_chan</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">bn_chan</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">hid_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">chunk_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">hop_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">n_repeats</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+        <span class="n">norm_type</span><span class="o">=</span><span class="s2">&quot;gLN&quot;</span><span class="p">,</span>
+        <span class="n">mask_act</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span>
+        <span class="n">bidirectional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">rnn_type</span><span class="o">=</span><span class="s2">&quot;LSTM&quot;</span><span class="p">,</span>
+        <span class="n">num_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">dropout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DPRNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_chan</span> <span class="o">=</span> <span class="n">in_chan</span>
+        <span class="n">out_chan</span> <span class="o">=</span> <span class="n">out_chan</span> <span class="k">if</span> <span class="n">out_chan</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">in_chan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_chan</span> <span class="o">=</span> <span class="n">out_chan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn_chan</span> <span class="o">=</span> <span class="n">bn_chan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hid_size</span> <span class="o">=</span> <span class="n">hid_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span> <span class="o">=</span> <span class="n">chunk_size</span>
+        <span class="n">hop_size</span> <span class="o">=</span> <span class="n">hop_size</span> <span class="k">if</span> <span class="n">hop_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">chunk_size</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hop_size</span> <span class="o">=</span> <span class="n">hop_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_repeats</span> <span class="o">=</span> <span class="n">n_repeats</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span> <span class="o">=</span> <span class="n">n_src</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm_type</span> <span class="o">=</span> <span class="n">norm_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_act</span> <span class="o">=</span> <span class="n">mask_act</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bidirectional</span> <span class="o">=</span> <span class="n">bidirectional</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn_type</span> <span class="o">=</span> <span class="n">rnn_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span> <span class="o">=</span> <span class="n">num_layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout</span>
+
+        <span class="n">layer_norm</span> <span class="o">=</span> <span class="n">norms</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">norm_type</span><span class="p">)(</span><span class="n">in_chan</span><span class="p">)</span>
+        <span class="n">bottleneck_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">in_chan</span><span class="p">,</span> <span class="n">bn_chan</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bottleneck</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">layer_norm</span><span class="p">,</span> <span class="n">bottleneck_conv</span><span class="p">)</span>
+
+        <span class="c1"># Succession of DPRNNBlocks.</span>
+        <span class="n">net</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_repeats</span><span class="p">):</span>
+            <span class="n">net</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="n">DPRNNBlock</span><span class="p">(</span>
+                    <span class="n">bn_chan</span><span class="p">,</span>
+                    <span class="n">hid_size</span><span class="p">,</span>
+                    <span class="n">norm_type</span><span class="o">=</span><span class="n">norm_type</span><span class="p">,</span>
+                    <span class="n">bidirectional</span><span class="o">=</span><span class="n">bidirectional</span><span class="p">,</span>
+                    <span class="n">rnn_type</span><span class="o">=</span><span class="n">rnn_type</span><span class="p">,</span>
+                    <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span>
+                    <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">net</span><span class="p">)</span>
+        <span class="c1"># Masking in 3D space</span>
+        <span class="n">net_out_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">bn_chan</span><span class="p">,</span> <span class="n">n_src</span> <span class="o">*</span> <span class="n">bn_chan</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">PReLU</span><span class="p">(),</span> <span class="n">net_out_conv</span><span class="p">)</span>
+        <span class="c1"># Gating and masking in 2D space (after fold)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net_out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">bn_chan</span><span class="p">,</span> <span class="n">bn_chan</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net_gate</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">bn_chan</span><span class="p">,</span> <span class="n">bn_chan</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">bn_chan</span><span class="p">,</span> <span class="n">out_chan</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Get activation function.</span>
+        <span class="n">mask_nl_class</span> <span class="o">=</span> <span class="n">activations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mask_act</span><span class="p">)</span>
+        <span class="c1"># For softmax, feed the source dimension.</span>
+        <span class="k">if</span> <span class="n">has_arg</span><span class="p">(</span><span class="n">mask_nl_class</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_act</span> <span class="o">=</span> <span class="n">mask_nl_class</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_act</span> <span class="o">=</span> <span class="n">mask_nl_class</span><span class="p">()</span>
+
+<div class="viewcode-block" id="DPRNN.forward"><a class="viewcode-back" href="../../../package_reference/blocks.html#asteroid.masknn.DPRNN.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mixture_w</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            mixture_w (:class:`torch.Tensor`): Tensor of shape</span>
+<span class="sd">                [batch, n_filters, n_frames]</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            :class:`torch.Tensor`</span>
+<span class="sd">                estimated mask of shape [batch, n_src, n_filters, n_frames]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">batch</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">,</span> <span class="n">n_frames</span> <span class="o">=</span> <span class="n">mixture_w</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottleneck</span><span class="p">(</span><span class="n">mixture_w</span><span class="p">)</span>  <span class="c1"># [batch, bn_chan, n_frames]</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">unfold</span><span class="p">(</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hop_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">n_chunks</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn_chan</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">,</span> <span class="n">n_chunks</span><span class="p">)</span>
+        <span class="c1"># Apply stacked DPRNN Blocks sequentially</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="c1"># Map to sources with kind of 2D masks</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_out</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn_chan</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">,</span> <span class="n">n_chunks</span><span class="p">)</span>
+        <span class="c1"># Overlap and add:</span>
+        <span class="c1"># [batch, out_chan, chunk_size, n_chunks] -&gt; [batch, out_chan, n_frames]</span>
+        <span class="n">to_unfold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn_chan</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">fold</span><span class="p">(</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span><span class="p">,</span> <span class="n">to_unfold</span><span class="p">,</span> <span class="n">n_chunks</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">n_frames</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">stride</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hop_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="c1"># Apply gating</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">batch</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn_chan</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">net_out</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">net_gate</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="c1"># Compute mask</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_net</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="n">est_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_act</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+        <span class="n">est_mask</span> <span class="o">=</span> <span class="n">est_mask</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_chan</span><span class="p">,</span> <span class="n">n_frames</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">est_mask</span></div>
+
+<div class="viewcode-block" id="DPRNN.get_config"><a class="viewcode-back" href="../../../apidoc/asteroid.masknn.recurrent.html#asteroid.masknn.DPRNN.get_config">[docs]</a>    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;in_chan&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_chan</span><span class="p">,</span>
+            <span class="s2">&quot;out_chan&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_chan</span><span class="p">,</span>
+            <span class="s2">&quot;bn_chan&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn_chan</span><span class="p">,</span>
+            <span class="s2">&quot;hid_size&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hid_size</span><span class="p">,</span>
+            <span class="s2">&quot;chunk_size&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">,</span>
+            <span class="s2">&quot;hop_size&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hop_size</span><span class="p">,</span>
+            <span class="s2">&quot;n_repeats&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_repeats</span><span class="p">,</span>
+            <span class="s2">&quot;n_src&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span><span class="p">,</span>
+            <span class="s2">&quot;norm_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm_type</span><span class="p">,</span>
+            <span class="s2">&quot;mask_act&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_act</span><span class="p">,</span>
+            <span class="s2">&quot;bidirectional&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bidirectional</span><span class="p">,</span>
+            <span class="s2">&quot;rnn_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rnn_type</span><span class="p">,</span>
+            <span class="s2">&quot;num_layers&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span><span class="p">,</span>
+            <span class="s2">&quot;dropout&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">config</span></div></div>
+
+
+<div class="viewcode-block" id="LSTMMasker"><a class="viewcode-back" href="../../../package_reference/blocks.html#asteroid.masknn.LSTMMasker">[docs]</a><span class="k">class</span> <span class="nc">LSTMMasker</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; LSTM mask network introduced in [1], without skip connections.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        in_chan (int): Number of input filters.</span>
+<span class="sd">        n_src (int): Number of masks to estimate.</span>
+<span class="sd">        out_chan  (int or None): Number of bins in the estimated masks.</span>
+<span class="sd">            Defaults to `in_chan`.</span>
+<span class="sd">        rnn_type (str, optional): Type of RNN used. Choose between ``&#39;RNN&#39;``,</span>
+<span class="sd">            ``&#39;LSTM&#39;`` and ``&#39;GRU&#39;``.</span>
+<span class="sd">        n_layers (int, optional): Number of layers in each RNN.</span>
+<span class="sd">        hid_size (int): Number of neurons in the RNNs cell state.</span>
+<span class="sd">        mask_act (str, optional): Which non-linear function to generate mask.</span>
+<span class="sd">        bidirectional (bool, optional): Whether to use BiLSTM</span>
+<span class="sd">        dropout (float, optional): Dropout ratio, must be in [0,1].</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1]: Yi Luo et al. &quot;Real-time Single-channel Dereverberation and Separation</span>
+<span class="sd">            with Time-domain Audio Separation Network&quot;, Interspeech 2018</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_chan</span><span class="p">,</span>
+        <span class="n">n_src</span><span class="p">,</span>
+        <span class="n">out_chan</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">rnn_type</span><span class="o">=</span><span class="s2">&quot;lstm&quot;</span><span class="p">,</span>
+        <span class="n">n_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">hid_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">dropout</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+        <span class="n">mask_act</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">,</span>
+        <span class="n">bidirectional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">in_chan</span> <span class="o">=</span> <span class="n">in_chan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span> <span class="o">=</span> <span class="n">n_src</span>
+        <span class="n">out_chan</span> <span class="o">=</span> <span class="n">out_chan</span> <span class="k">if</span> <span class="n">out_chan</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">in_chan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_chan</span> <span class="o">=</span> <span class="n">out_chan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn_type</span> <span class="o">=</span> <span class="n">rnn_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hid_size</span> <span class="o">=</span> <span class="n">hid_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">dropout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_act</span> <span class="o">=</span> <span class="n">mask_act</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bidirectional</span> <span class="o">=</span> <span class="n">bidirectional</span>
+
+        <span class="c1"># Get activation function.</span>
+        <span class="n">mask_nl_class</span> <span class="o">=</span> <span class="n">activations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mask_act</span><span class="p">)</span>
+        <span class="c1"># For softmax, feed the source dimension.</span>
+        <span class="k">if</span> <span class="n">has_arg</span><span class="p">(</span><span class="n">mask_nl_class</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_act</span> <span class="o">=</span> <span class="n">mask_nl_class</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_act</span> <span class="o">=</span> <span class="n">mask_nl_class</span><span class="p">()</span>
+
+        <span class="c1"># Create TasNet masker</span>
+        <span class="n">out_size</span> <span class="o">=</span> <span class="n">hid_size</span> <span class="o">*</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">bidirectional</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bidirectional</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bn_layer</span> <span class="o">=</span> <span class="n">GlobLN</span><span class="p">(</span><span class="n">in_chan</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bn_layer</span> <span class="o">=</span> <span class="n">CumLN</span><span class="p">(</span><span class="n">in_chan</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">masker</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">SingleRNN</span><span class="p">(</span>
+                <span class="s2">&quot;lstm&quot;</span><span class="p">,</span>
+                <span class="n">in_chan</span><span class="p">,</span>
+                <span class="n">hidden_size</span><span class="o">=</span><span class="n">hid_size</span><span class="p">,</span>
+                <span class="n">n_layers</span><span class="o">=</span><span class="n">n_layers</span><span class="p">,</span>
+                <span class="n">bidirectional</span><span class="o">=</span><span class="n">bidirectional</span><span class="p">,</span>
+                <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">out_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span> <span class="o">*</span> <span class="n">out_chan</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_act</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="LSTMMasker.forward"><a class="viewcode-back" href="../../../apidoc/asteroid.masknn.recurrent.html#asteroid.masknn.LSTMMasker.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">to_sep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">est_masks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">masker</span><span class="p">(</span><span class="n">to_sep</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">est_masks</span> <span class="o">=</span> <span class="n">est_masks</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_chan</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">est_masks</span></div>
+
+<div class="viewcode-block" id="LSTMMasker.get_config"><a class="viewcode-back" href="../../../apidoc/asteroid.masknn.recurrent.html#asteroid.masknn.LSTMMasker.get_config">[docs]</a>    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;in_chan&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_chan</span><span class="p">,</span>
+            <span class="s2">&quot;n_src&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_src</span><span class="p">,</span>
+            <span class="s2">&quot;out_chan&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_chan</span><span class="p">,</span>
+            <span class="s2">&quot;rnn_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rnn_type</span><span class="p">,</span>
+            <span class="s2">&quot;n_layers&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_layers</span><span class="p">,</span>
+            <span class="s2">&quot;hid_size&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hid_size</span><span class="p">,</span>
+            <span class="s2">&quot;dropout&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">,</span>
+            <span class="s2">&quot;mask_act&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_act</span><span class="p">,</span>
+            <span class="s2">&quot;bidirectional&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bidirectional</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">config</span></div></div>
+</pre></div>
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Oncoming.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+         <script src="../../../_static/jquery.js"></script>
+         <script src="../../../_static/underscore.js"></script>
+         <script src="../../../_static/doctools.js"></script>
+         <script src="../../../_static/language_data.js"></script>
+         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+     
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../../../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <!--
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for PyTorch</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <a class="with-right-arrow" href="">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Resources</a>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="https://mpariente.github.io/asteroid/" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+
+        <div class="footer-logo-col">
+          <img class="footer-logo-img" src="../../../_static/images/dark_asteroid_logo.svg"/>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Asteroid</a></li>
+            <li><a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Features</a></li>
+            <li><a href="">Ecosystem</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Blog</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Support</a></li>
+            <li><a href="">Tutorials</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Docs</a></li>
+            <li><a href="https://discuss.pytorch.org" target="_blank">Discuss</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/issues" target="_blank">Github Issues</a></li>
+            <li><a href="" target="_blank">Slack</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/blob/master/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col follow-us-col">
+          <ul>
+            <li class="list-title">Follow Us</li>
+            <li>
+              <div id="mc_embed_signup">
+                <form
+                  action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="email-subscribe-form validate"
+                  target="_blank"
+                  novalidate>
+                  <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
+                    <div class="mc-field-group">
+                      <label for="mce-EMAIL" style="display:none;">Email Address</label>
+                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
+                    </div>
+
+                    <div id="mce-responses" class="clear">
+                      <div class="response" id="mce-error-response" style="display:none"></div>
+                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
+
+                    <div class="clear">
+                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button email-subscribe-button">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </li>
+          </ul>
+
+          <div class="footer-social-icons">
+            <a href="" target="_blank" class="facebook"></a>
+            <a href="https://twitter.com/" target="_blank" class="twitter"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer> -->
+
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch Lightning"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Features</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Resources</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../../../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

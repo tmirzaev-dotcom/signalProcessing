@@ -1,0 +1,695 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>asteroid.filterbanks.griffin_lim &mdash; asteroid 0.4.0alpha documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://github.com/mpariente/asteroid_modules/asteroid/filterbanks/griffin_lim.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" /> -->
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch">
+       <!-- <img class="call-to-action-img" src="../../../_static/images/asteroid_logo_dark.png"/> -->
+      </a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <div class="resources-dropdown">
+              <a id="resourcesDropdownButton" data-toggle="resources-dropdown">
+                Resources
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/"">
+                  <span class=dropdown-title>Developer Resources</span>
+                  <p>Find resources and get questions answered</p>
+                </a>
+                <!--
+                <a class="nav-dropdown-item" href="https://mpariente.github.io/asteroid/">
+                  <span class=dropdown-title>About</span>
+                  <p>Learn about PyTorch’s features and capabilities</p>
+                </a>
+                -->
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.4.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Start here</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../why_use_asteroid.html">What is Asteroid?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Asteroid</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/egs_README.html">What is a recipe?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../supported_datasets.html">Datasets and tasks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../training_and_evaluation.html">Training and Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/pretrained_models.html">Pretrained models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Notebooks and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">NB: Getting stated with Asteroid</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/02_Filterbank.ipynb">NB: Understanding the Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/03_PITLossWrapper.ipynb">NB: Our PITLossWrapper explained</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/04_ProcessLargeAudioFiles.ipynb">NB: Processing large wav files</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://colab.research.google.com/drive/1BDNQZBJCDcwQhSguf3XBE7ff2KXhWu_j">Community NB: Numpy vs. Asteroid STFT</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/data.html">PyTorch Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/filterbanks.html">Filterbank API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/blocks.html">DNN building blocks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/losses.html">Losses &amp; Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/system.html">Lightning Wrapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/optimizers.html">Optimizers &amp; Schedulers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/dsp.html">DSP Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/utils.html">Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../package_reference/cli.html">CLI</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution_guide.html">Asteroid High-Level Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readmes/CONTRIBUTING.html">How to contribute</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../../../index.html">
+          
+            Docs
+          
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="../../index.html">Module code</a> &gt;</li>
+        
+          <li><a href="../../asteroid.html">asteroid</a> &gt;</li>
+        
+          <li><a href="../filterbanks.html">asteroid.filterbanks</a> &gt;</li>
+        
+      <li>asteroid.filterbanks.griffin_lim</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+
+        
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <h1>Source code for asteroid.filterbanks.griffin_lim</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Encoder</span><span class="p">,</span> <span class="n">Decoder</span><span class="p">,</span> <span class="n">STFTFB</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.stft_fb</span> <span class="kn">import</span> <span class="n">perfect_synthesis_window</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">transforms</span>
+<span class="kn">from</span> <span class="nn">..dsp.consistency</span> <span class="kn">import</span> <span class="n">mixture_consistency</span>
+
+
+<div class="viewcode-block" id="griffin_lim"><a class="viewcode-back" href="../../../package_reference/filterbanks.html#asteroid.filterbanks.griffin_lim">[docs]</a><span class="k">def</span> <span class="nf">griffin_lim</span><span class="p">(</span><span class="n">mag_specgram</span><span class="p">,</span> <span class="n">stft_enc</span><span class="p">,</span> <span class="n">angles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">istft_dec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Estimates matching phase from magnitude spectogram using the</span>
+<span class="sd">    &#39;fast&#39; Griffin Lim algorithm [1].</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mag_specgram (torch.Tensor): (any, dim, ension, freq, frames) as</span>
+<span class="sd">            returned by `Encoder(STFTFB)`, the magnitude spectrogram to be</span>
+<span class="sd">            inverted.</span>
+<span class="sd">        stft_enc (Encoder[STFTFB]): The `Encoder(STFTFB())` object that was</span>
+<span class="sd">            used to compute the input `mag_spec`.</span>
+<span class="sd">        angles (None or Tensor): Angles to use to initialize the algorithm.</span>
+<span class="sd">            If None (default), angles are init with uniform ditribution.</span>
+<span class="sd">        istft_dec (None or Decoder[STFTFB]): Optional Decoder to use to get</span>
+<span class="sd">            back to the time domain. If None (default), a perfect</span>
+<span class="sd">            reconstruction Decoder is built from `stft_enc`.</span>
+<span class="sd">        n_iter (int): Number of griffin-lim iterations to run.</span>
+<span class="sd">        momentum (float): The momentum of fast Griffin-Lim. Original</span>
+<span class="sd">            Griffin-Lim is obtained for momentum=0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        torch.Tensor: estimated waveforms of shape (any, dim, ension, time).</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; stft = Encoder(STFTFB(n_filters=256, kernel_size=256, stride=128))</span>
+<span class="sd">        &gt;&gt;&gt; wav = torch.randn(2, 1, 8000)</span>
+<span class="sd">        &gt;&gt;&gt; spec = stft(wav)</span>
+<span class="sd">        &gt;&gt;&gt; masked_spec = spec * torch.sigmoid(torch.randn_like(spec))</span>
+<span class="sd">        &gt;&gt;&gt; mag = transforms.take_mag(masked_spec, -2)</span>
+<span class="sd">        &gt;&gt;&gt; est_wav = griffin_lim(mag, stft, n_iter=32)</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Perraudin et al. &quot;A fast Griffin-Lim algorithm,&quot; WASPAA 2013.</span>
+<span class="sd">        [2] D. W. Griffin and J. S. Lim:  &quot;Signal estimation from modified</span>
+<span class="sd">        short-time Fourier transform,&quot; ASSP 1984.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># We can create perfect iSTFT from STFT Encoder</span>
+    <span class="k">if</span> <span class="n">istft_dec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Compute window for perfect resynthesis</span>
+        <span class="n">syn_win</span> <span class="o">=</span> <span class="n">perfect_synthesis_window</span><span class="p">(</span><span class="n">stft_enc</span><span class="o">.</span><span class="n">filterbank</span><span class="o">.</span><span class="n">window</span><span class="p">,</span> <span class="n">stft_enc</span><span class="o">.</span><span class="n">stride</span><span class="p">)</span>
+        <span class="n">istft_dec</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">(</span><span class="n">STFTFB</span><span class="p">(</span><span class="o">**</span><span class="n">stft_enc</span><span class="o">.</span><span class="n">get_config</span><span class="p">(),</span> <span class="n">window</span><span class="o">=</span><span class="n">syn_win</span><span class="p">))</span>
+
+    <span class="c1"># If no intitial phase is provided initialize uniformly</span>
+    <span class="k">if</span> <span class="n">angles</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">angles</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand_like</span><span class="p">(</span><span class="n">mag_specgram</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">mag_specgram</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">angles</span> <span class="o">=</span> <span class="n">angles</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">*</span><span class="n">mag_specgram</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="c1"># Initialize rebuilt (useful to use momentum)</span>
+    <span class="n">rebuilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>
+        <span class="n">prev_built</span> <span class="o">=</span> <span class="n">rebuilt</span>
+        <span class="c1"># Go to the time domain</span>
+        <span class="n">complex_specgram</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">from_mag_and_phase</span><span class="p">(</span><span class="n">mag_specgram</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+        <span class="n">waveform</span> <span class="o">=</span> <span class="n">istft_dec</span><span class="p">(</span><span class="n">complex_specgram</span><span class="p">)</span>
+        <span class="c1"># And back to TF domain</span>
+        <span class="n">rebuilt</span> <span class="o">=</span> <span class="n">stft_enc</span><span class="p">(</span><span class="n">waveform</span><span class="p">)</span>
+        <span class="c1"># Update phase estimates (with momentum)</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">rebuilt</span> <span class="o">-</span> <span class="n">momentum</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">momentum</span><span class="p">)</span> <span class="o">*</span> <span class="n">prev_built</span>
+        <span class="n">angles</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+
+    <span class="n">final_complex_spec</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">from_mag_and_phase</span><span class="p">(</span><span class="n">mag_specgram</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">istft_dec</span><span class="p">(</span><span class="n">final_complex_spec</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="misi"><a class="viewcode-back" href="../../../package_reference/filterbanks.html#asteroid.filterbanks.misi">[docs]</a><span class="k">def</span> <span class="nf">misi</span><span class="p">(</span>
+    <span class="n">mixture_wav</span><span class="p">,</span>
+    <span class="n">mag_specgrams</span><span class="p">,</span>
+    <span class="n">stft_enc</span><span class="p">,</span>
+    <span class="n">angles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">istft_dec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_iter</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">momentum</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+    <span class="n">src_weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Jointly estimates matching phase from magnitude spectograms using the</span>
+<span class="sd">    Multiple Input Spectrogram Inversion (MISI) algorithm [1].</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mixture_wav (torch.Tensor): (batch, time)</span>
+<span class="sd">        mag_specgrams (torch.Tensor): (batch, n_src, freq, frames) as</span>
+<span class="sd">            returned by `Encoder(STFTFB)`, the magnitude spectrograms to be</span>
+<span class="sd">            jointly inverted using MISI (modified or not).</span>
+<span class="sd">        stft_enc (Encoder[STFTFB]): The `Encoder(STFTFB())` object that was</span>
+<span class="sd">            used to compute the input `mag_spec`.</span>
+<span class="sd">        angles (None or Tensor): Angles to use to initialize the algorithm.</span>
+<span class="sd">            If None (default), angles are init with uniform ditribution.</span>
+<span class="sd">        istft_dec (None or Decoder[STFTFB]): Optional Decoder to use to get</span>
+<span class="sd">            back to the time domain. If None (default), a perfect</span>
+<span class="sd">            reconstruction Decoder is built from `stft_enc`.</span>
+<span class="sd">        n_iter (int): Number of MISI iterations to run.</span>
+<span class="sd">        momentum (float): Momentum on updates (this argument comes from</span>
+<span class="sd">            GriffinLim). Defaults to 0 as it was never proposed anywhere.</span>
+<span class="sd">        src_weights (None or torch.Tensor): Consistency weight for each source.</span>
+<span class="sd">            Shape needs to be broadcastable to `istft_dec(mag_specgrams)`.</span>
+<span class="sd">            We make sure that the weights sum up to 1 along dim `dim`.</span>
+<span class="sd">            If `src_weights` is None, compute them based on relative power.</span>
+<span class="sd">        dim (int): Axis which contains the sources in `mag_specgrams`.</span>
+<span class="sd">            Used for consistency constraint.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        torch.Tensor: estimated waveforms of shape (batch, n_src, time).</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; stft = Encoder(STFTFB(n_filters=256, kernel_size=256, stride=128))</span>
+<span class="sd">        &gt;&gt;&gt; wav = torch.randn(2, 3, 8000)</span>
+<span class="sd">        &gt;&gt;&gt; specs = stft(wav)</span>
+<span class="sd">        &gt;&gt;&gt; masked_specs = specs * torch.sigmoid(torch.randn_like(specs))</span>
+<span class="sd">        &gt;&gt;&gt; mag = transforms.take_mag(masked_specs, -2)</span>
+<span class="sd">        &gt;&gt;&gt; est_wav = misi(wav.sum(1), mag, stft, n_iter=32)</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Gunawan and Sen, &quot;Iterative Phase Estimation for the Synthesis of</span>
+<span class="sd">        Separated Sources From Single-Channel Mixtures,&quot; in IEEE Signal</span>
+<span class="sd">        Processing Letters, 2010.</span>
+<span class="sd">        [2] Wang, LeRoux et al. “End-to-End Speech Separation with Unfolded</span>
+<span class="sd">        Iterative Phase Reconstruction.” Interspeech 2018 (2018)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># We can create perfect iSTFT from STFT Encoder</span>
+    <span class="k">if</span> <span class="n">istft_dec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Compute window for perfect resynthesis</span>
+        <span class="n">syn_win</span> <span class="o">=</span> <span class="n">perfect_synthesis_window</span><span class="p">(</span><span class="n">stft_enc</span><span class="o">.</span><span class="n">filterbank</span><span class="o">.</span><span class="n">window</span><span class="p">,</span> <span class="n">stft_enc</span><span class="o">.</span><span class="n">stride</span><span class="p">)</span>
+        <span class="n">istft_dec</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">(</span><span class="n">STFTFB</span><span class="p">(</span><span class="o">**</span><span class="n">stft_enc</span><span class="o">.</span><span class="n">get_config</span><span class="p">(),</span> <span class="n">window</span><span class="o">=</span><span class="n">syn_win</span><span class="p">))</span>
+
+    <span class="c1"># If no intitial phase is provided initialize uniformly</span>
+    <span class="k">if</span> <span class="n">angles</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">angles</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand_like</span><span class="p">(</span><span class="n">mag_specgrams</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">mag_specgrams</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+    <span class="c1"># wav_dim is used in mixture_consistency.</span>
+    <span class="c1"># Transform spec src dim to wav src dim for positive and negative dim</span>
+    <span class="n">wav_dim</span> <span class="o">=</span> <span class="n">dim</span> <span class="k">if</span> <span class="n">dim</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">dim</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="c1"># We forward/backward the mixture through STFT to have matching shapes</span>
+    <span class="c1"># with the input spectrograms as well as  account for potential modulations</span>
+    <span class="c1"># if the window were not chosen to enable perfect reconstruction.</span>
+    <span class="n">mixture_wav</span> <span class="o">=</span> <span class="n">istft_dec</span><span class="p">(</span><span class="n">stft_enc</span><span class="p">(</span><span class="n">mixture_wav</span><span class="p">))</span>
+
+    <span class="c1"># Initialize rebuilt (useful to use momentum)</span>
+    <span class="n">rebuilt</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>
+        <span class="n">prev_built</span> <span class="o">=</span> <span class="n">rebuilt</span>
+        <span class="c1"># Go to the time domain</span>
+        <span class="n">complex_specgram</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">from_mag_and_phase</span><span class="p">(</span><span class="n">mag_specgrams</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+        <span class="n">wavs</span> <span class="o">=</span> <span class="n">istft_dec</span><span class="p">(</span><span class="n">complex_specgram</span><span class="p">)</span>
+        <span class="c1"># Make wavs sum up to the mixture</span>
+        <span class="n">consistent_wavs</span> <span class="o">=</span> <span class="n">mixture_consistency</span><span class="p">(</span>
+            <span class="n">mixture_wav</span><span class="p">,</span> <span class="n">wavs</span><span class="p">,</span> <span class="n">src_weights</span><span class="o">=</span><span class="n">src_weights</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">wav_dim</span>
+        <span class="p">)</span>
+        <span class="c1"># Back to TF domain</span>
+        <span class="n">rebuilt</span> <span class="o">=</span> <span class="n">stft_enc</span><span class="p">(</span><span class="n">consistent_wavs</span><span class="p">)</span>
+        <span class="c1"># Update phase estimates (with momentum). Keep the momentum here</span>
+        <span class="c1"># in case. Was shown useful in GF, might be here. We&#39;ll see.</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">rebuilt</span> <span class="o">-</span> <span class="n">momentum</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">momentum</span><span class="p">)</span> <span class="o">*</span> <span class="n">prev_built</span>
+        <span class="n">angles</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+    <span class="c1"># Final source estimates</span>
+    <span class="n">final_complex_spec</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">from_mag_and_phase</span><span class="p">(</span><span class="n">mag_specgrams</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">istft_dec</span><span class="p">(</span><span class="n">final_complex_spec</span><span class="p">)</span></div>
+</pre></div>
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+  
+
+    <hr>
+
+  
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Oncoming.
+
+    </p>
+  </div>
+    
+      <div>
+        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+     
+
+</footer>
+
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+         <script src="../../../_static/jquery.js"></script>
+         <script src="../../../_static/underscore.js"></script>
+         <script src="../../../_static/doctools.js"></script>
+         <script src="../../../_static/language_data.js"></script>
+         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+     
+
+  
+
+  <script type="text/javascript" src="../../../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../../../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <div class="container-fluid" id="docs-tutorials-resources">
+    <div class="container">
+      <div class="row">
+        <!--
+        <div class="col-md-4 text-center">
+          <h2>Docs</h2>
+          <p>Access comprehensive developer documentation for PyTorch</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Docs</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Tutorials</h2>
+          <p>Get in-depth tutorials for beginners and advanced developers</p>
+          <a class="with-right-arrow" href="">View Tutorials</a>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <h2>Resources</h2>
+          <p>Find development resources and get your questions answered</p>
+          <a class="with-right-arrow" href="https://mpariente.github.io/asteroid/">View Resources</a>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="https://mpariente.github.io/asteroid/" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+
+        <div class="footer-logo-col">
+          <img class="footer-logo-img" src="../../../_static/images/dark_asteroid_logo.svg"/>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Asteroid</a></li>
+            <li><a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Features</a></li>
+            <li><a href="">Ecosystem</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Blog</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://mpariente.github.io/asteroid/">Support</a></li>
+            <li><a href="">Tutorials</a></li>
+            <li><a href="https://mpariente.github.io/asteroid/">Docs</a></li>
+            <li><a href="https://discuss.pytorch.org" target="_blank">Discuss</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/issues" target="_blank">Github Issues</a></li>
+            <li><a href="" target="_blank">Slack</a></li>
+            <li><a href="https://github.com/mpariente/asteroid/blob/master/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col follow-us-col">
+          <ul>
+            <li class="list-title">Follow Us</li>
+            <li>
+              <div id="mc_embed_signup">
+                <form
+                  action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
+                  method="post"
+                  id="mc-embedded-subscribe-form"
+                  name="mc-embedded-subscribe-form"
+                  class="email-subscribe-form validate"
+                  target="_blank"
+                  novalidate>
+                  <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
+                    <div class="mc-field-group">
+                      <label for="mce-EMAIL" style="display:none;">Email Address</label>
+                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
+                    </div>
+
+                    <div id="mce-responses" class="clear">
+                      <div class="response" id="mce-error-response" style="display:none"></div>
+                      <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
+
+                    <div class="clear">
+                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button email-subscribe-button">
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </li>
+          </ul>
+
+          <div class="footer-social-icons">
+            <a href="" target="_blank" class="facebook"></a>
+            <a href="https://twitter.com/" target="_blank" class="twitter"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer> -->
+
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="https://mpariente.github.io/asteroid/" aria-label="PyTorch Lightning"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://colab.research.google.com/github/mpariente/asteroid/blob/master/notebooks/01_AsteroidGettingStarted.ipynb">Get Started</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Features</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Blog</a>
+          </li>
+
+          <li>
+            <a href="">Tutorials</a>
+          </li>
+
+          <li class="active">
+            <a href="https://mpariente.github.io/asteroid/">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://mpariente.github.io/asteroid/">Resources</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/mpariente/asteroid">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../../../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+      mainMenuDropdown.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>
